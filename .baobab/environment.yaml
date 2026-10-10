@@ -1,10 +1,10 @@
-schema: { name: "nabhold-development-environment-contract", version: "1.0" }
+schema: { name: "baobab-platform-development-environment-contract", version: "1.0" }
 application: { name: "thamani", version: "0.1.0", entity_id: "THAMANI-GLOBAL" }
 environment:
   {
     provider: "baobab-dev",
     profile: "frontend",
-    minimum_version: "1.4.2-frontend",
+    minimum_version: "1.4.4-frontend",
     contract_minimum_version: "1.0",
   }
 compatibility_policy:
@@ -24,5 +24,5 @@ validation:
     - { name: "docker", reason: "Not required for ordinary Codespaces development." }
   pending_capabilities: []
 notes:
-  - "Codespaces uses ghcr.io/nabhold/baobab-dev:1.4.2-frontend."
-  - "Browser-dependent CI uses the 1.4.2-frontend-e2e profile."
+  - "Codespaces uses ghcr.io/baobab-platform/baobab-dev:1.4.4-frontend."
+  - "Browser-dependent CI uses the 1.4.4-frontend-e2e profile."
