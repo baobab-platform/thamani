@@ -10,14 +10,14 @@ The deployed repository's older `src/app/page.tsx`, `src/app/shop/page.tsx`, `sr
 
 ## Actual inherited Medusa v2 consumers
 
-| Source | Operation | Query | Response assumptions | Medusa 2.21.2 impact |
-| --- | --- | --- | --- | --- |
-| `src/lib/medusa/products.ts` | `sdk.store.product.list` twice | `limit:24,q?,region_id` and `handle,limit:1,region_id` | `id,handle,title,subtitle,description,thumbnail,variants[].id,title,calculated_price` | Default variant/calculated-price projection needs *live* proof |
-| `src/lib/medusa/cart.ts` | `sdk.store.cart.create` | `region_id` | `cart.id` persisted to server-set HTTP-only cookie | Strict Store fields are not explicitly requested |
-| `src/lib/medusa/cart.ts` | `sdk.store.cart.createLineItem` | `variant_id,quantity` | Mutation succeeds for region and active channel | Backend guard, payment/shipping and seller policy must be demonstrated separately |
-| `src/lib/medusa/cart.ts` | `sdk.store.cart.retrieve` | `cartId` from cookie | `cart.items[].id,title,quantity` | Default cart item projection needs staging proof |
+| Source                       | Operation                       | Query                                                  | Response assumptions                                                                  | Medusa 2.21.2 impact                                                              |
+| ---------------------------- | ------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `src/lib/medusa/products.ts` | `sdk.store.product.list` twice  | `limit:24,q?,region_id` and `handle,limit:1,region_id` | `id,handle,title,subtitle,description,thumbnail,variants[].id,title,calculated_price` | Default variant/calculated-price projection needs _live_ proof                    |
+| `src/lib/medusa/cart.ts`     | `sdk.store.cart.create`         | `region_id`                                            | `cart.id` persisted to server-set HTTP-only cookie                                    | Strict Store fields are not explicitly requested                                  |
+| `src/lib/medusa/cart.ts`     | `sdk.store.cart.createLineItem` | `variant_id,quantity`                                  | Mutation succeeds for region and active channel                                       | Backend guard, payment/shipping and seller policy must be demonstrated separately |
+| `src/lib/medusa/cart.ts`     | `sdk.store.cart.retrieve`       | `cartId` from cookie                                   | `cart.items[].id,title,quantity`                                                      | Default cart item projection needs staging proof                                  |
 
-**Static findings:** No explicit `fields` selection in these callers, no `/store/search` use, and `src/app/checkout/page.tsx` explicitly gates real order completion. Thus strict allowed-field paths and search-index-only expansions pose no *known direct request-selector* incompatibility in the legacy code. However the response expectations about `variants[].calculated_price` and `cart.items` are unproven on Medusa 2.21.2. Thamani pins `@medusajs/js-sdk@2.19.0`, so TypeScript compatibility with a 2.21.2 backend must not be inferred.
+**Static findings:** No explicit `fields` selection in these callers, no `/store/search` use, and `src/app/checkout/page.tsx` explicitly gates real order completion. Thus strict allowed-field paths and search-index-only expansions pose no _known direct request-selector_ incompatibility in the legacy code. However the response expectations about `variants[].calculated_price` and `cart.items` are unproven on Medusa 2.21.2. Thamani pins `@medusajs/js-sdk@2.19.0`, so TypeScript compatibility with a 2.21.2 backend must not be inferred.
 
 ## Tests and limitations
 
@@ -37,7 +37,7 @@ Live legacy mode checks field shapes and `q` product listing; with `MEDUSA_2212_
 
 ## Decision
 
-1. Keep `baobab-trade` Medusa 2.21.2 security upgrade candidate isolated until ZuriBeans' *current* Store API calls and Thamani's *remaining legacy* calls have live projection evidence.
+1. Keep `baobab-trade` Medusa 2.21.2 security upgrade candidate isolated until ZuriBeans' _current_ Store API calls and Thamani's _remaining legacy_ calls have live projection evidence.
 2. Do **not** block Medusa's necessary security hardening forever on Thamani's B2C redesign: either decommission/disable the obsolete retail routes after acceptance of its B2B services estate, or maintain a strictly time-bounded compatibility smoke for any historical retail surface that remains actually reachable.
 3. Implement Thamani B2B logistics via CP-authorised capability consumption, RFQ/contract/service-order and TMS/Trade Docs/ERP capabilities, not an assumed Medusa cart. A legal-actor PEP for `SERVICE_CONTRACTING` or equivalent requires the appropriate independently approved LA-05 authority; a native Medusa seller-of-record checkout does not establish it.
 4. Retain market, tenant, organisation, IAM and provider authority boundaries. Never add a wildcard Medusa `allowFields` override to keep the old storefront running.

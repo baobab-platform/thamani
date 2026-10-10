@@ -261,18 +261,18 @@ The source domain SHALL remain authoritative for operational facts.
 
 Examples:
 
-| Fact | Authority |
-|---|---|
-| Movement departed | TMS |
-| Movement arrived | TMS |
-| Delivery completed | TMS |
-| Transport custody | TMS |
-| Warehouse receipt | Warehouse provider |
-| Warehouse damage observation | Warehouse provider |
-| Temperature observation | telemetry source / operational provider |
-| Customs hold | Trade Docs / external authority |
-| Document issued | Trade Docs |
-| Invoice posted | ERP |
+| Fact                         | Authority                               |
+| ---------------------------- | --------------------------------------- |
+| Movement departed            | TMS                                     |
+| Movement arrived             | TMS                                     |
+| Delivery completed           | TMS                                     |
+| Transport custody            | TMS                                     |
+| Warehouse receipt            | Warehouse provider                      |
+| Warehouse damage observation | Warehouse provider                      |
+| Temperature observation      | telemetry source / operational provider |
+| Customs hold                 | Trade Docs / external authority         |
+| Document issued              | Trade Docs                              |
+| Invoice posted               | ERP                                     |
 
 Claims SHALL reference these facts.
 

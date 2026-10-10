@@ -23,20 +23,20 @@ Thamani Global SHALL be repurposed from a consumer-first B2C ecommerce enterpris
 
 Thamani Global SHALL operate the following twelve business divisions:
 
-| # | Business division | Primary mandate |
-|---:|---|---|
-| 1 | Haulage | Road freight and physical cargo transportation |
-| 2 | Shipping | Maritime freight, shipping services and containerised/bulk carriage capability |
-| 3 | Freight Forwarding | Multimodal transport arrangement and freight orchestration |
-| 4 | Customs Brokerage | Customs clearance and regulatory border-service execution |
-| 5 | Warehousing | Storage, handling, cross-docking and distribution-centre services |
-| 6 | 3PL | Outsourced execution of one or more customer logistics functions |
-| 7 | Courier | Parcel, document and express movement |
-| 8 | Last Mile | Final-leg collection and delivery |
-| 9 | Cold Chain | Temperature- and condition-controlled logistics |
-| 10 | Project Logistics | Heavy, oversized, abnormal and complex cargo projects |
-| 11 | Cross-Border Logistics | International and regional corridor logistics |
-| 12 | 4PL | Multi-provider supply-chain orchestration and logistics control-tower services |
+|   # | Business division      | Primary mandate                                                                |
+| --: | ---------------------- | ------------------------------------------------------------------------------ |
+|   1 | Haulage                | Road freight and physical cargo transportation                                 |
+|   2 | Shipping               | Maritime freight, shipping services and containerised/bulk carriage capability |
+|   3 | Freight Forwarding     | Multimodal transport arrangement and freight orchestration                     |
+|   4 | Customs Brokerage      | Customs clearance and regulatory border-service execution                      |
+|   5 | Warehousing            | Storage, handling, cross-docking and distribution-centre services              |
+|   6 | 3PL                    | Outsourced execution of one or more customer logistics functions               |
+|   7 | Courier                | Parcel, document and express movement                                          |
+|   8 | Last Mile              | Final-leg collection and delivery                                              |
+|   9 | Cold Chain             | Temperature- and condition-controlled logistics                                |
+|  10 | Project Logistics      | Heavy, oversized, abnormal and complex cargo projects                          |
+|  11 | Cross-Border Logistics | International and regional corridor logistics                                  |
+|  12 | 4PL                    | Multi-provider supply-chain orchestration and logistics control-tower services |
 
 These divisions SHALL be represented as **business capabilities and operating divisions of the same legal entity**.
 

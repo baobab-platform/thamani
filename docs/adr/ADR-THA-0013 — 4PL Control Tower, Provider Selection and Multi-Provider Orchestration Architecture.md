@@ -3493,31 +3493,31 @@ but search remains a projection.
 
 # 169. Cross-Repository Authority Matrix
 
-| Concern | Authority |
-|---|---|
-| 4PL customer relationship | Thamani |
-| 4PL mandate | Thamani |
-| 4PL service order | Thamani |
-| Service composition | Thamani |
-| Logistics provider qualification | Thamani under THA-0004 |
-| Logistics provider selection | Thamani |
-| Provider assignment | Thamani |
-| Customer approval | Thamani/customer workflow |
-| Capability provider resolution | Control Plane |
-| Platform engine health/failover | Control Plane |
-| LogisticsShipment | TMS |
-| Consignment | TMS |
-| TransportPlan | TMS |
-| TransportMovement | TMS |
-| Carrier booking | TMS |
-| Warehouse physical execution | bound warehouse provider |
-| TradeDocument | Trade Docs |
-| CustomsCase | Trade Docs |
-| RegulatoryDecision | Regulations |
-| Financial posting | ERP |
-| Authentication | IAM |
-| Predictive recommendation | Pulse |
-| Control-tower projection | Thamani |
+| Concern                          | Authority                 |
+| -------------------------------- | ------------------------- |
+| 4PL customer relationship        | Thamani                   |
+| 4PL mandate                      | Thamani                   |
+| 4PL service order                | Thamani                   |
+| Service composition              | Thamani                   |
+| Logistics provider qualification | Thamani under THA-0004    |
+| Logistics provider selection     | Thamani                   |
+| Provider assignment              | Thamani                   |
+| Customer approval                | Thamani/customer workflow |
+| Capability provider resolution   | Control Plane             |
+| Platform engine health/failover  | Control Plane             |
+| LogisticsShipment                | TMS                       |
+| Consignment                      | TMS                       |
+| TransportPlan                    | TMS                       |
+| TransportMovement                | TMS                       |
+| Carrier booking                  | TMS                       |
+| Warehouse physical execution     | bound warehouse provider  |
+| TradeDocument                    | Trade Docs                |
+| CustomsCase                      | Trade Docs                |
+| RegulatoryDecision               | Regulations               |
+| Financial posting                | ERP                       |
+| Authentication                   | IAM                       |
+| Predictive recommendation        | Pulse                     |
+| Control-tower projection         | Thamani                   |
 
 ---
 
