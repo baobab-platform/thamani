@@ -6,6 +6,7 @@
 | Evidence class                   | Official registry document (input to domain acceptance; not yet signed off)                                                         |
 | Document                         | CIPC Form COR 14.3 Registration Certificate, issued by the Commissioner on 13/04/2026 at 13:33                                      |
 | Enterprise name                  | THAMANI GLOBAL                                                                                                                      |
+| Full registered name             | THAMANI GLOBAL (Pty) Ltd, confirmed by the sponsor on 10 October 2026                                                               |
 | Registration number              | 2026/291672/07                                                                                                                      |
 | Enterprise type                  | Private Company                                                                                                                     |
 | Enterprise status                | In Business (as at the certificate date)                                                                                            |
