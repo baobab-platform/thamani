@@ -1,21 +1,21 @@
 # Legal identity evidence: CIPC registration
 
-| Field | Value |
-|---|---|
-| Claim | Thamani Global's legal identity: name, registration number, jurisdiction, effective date |
-| Evidence class | Official registry document (input to domain acceptance; not yet signed off) |
-| Document | CIPC Form COR 14.3 Registration Certificate, issued by the Commissioner on 13/04/2026 at 13:33 |
-| Enterprise name | THAMANI GLOBAL |
-| Registration number | 2026/291672/07 |
-| Enterprise type | Private Company |
-| Enterprise status | In Business (as at the certificate date) |
-| Registration date | 09/04/2026 |
-| Business start date | 09/04/2026 |
-| Financial year end | February |
-| Jurisdiction | Republic of South Africa (`ZA`) |
-| Supplied by | Programme sponsor, 10 October 2026 |
+| Field                            | Value                                                                                                                               |
+| -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Claim                            | Thamani Global's legal identity: name, registration number, jurisdiction, effective date                                            |
+| Evidence class                   | Official registry document (input to domain acceptance; not yet signed off)                                                         |
+| Document                         | CIPC Form COR 14.3 Registration Certificate, issued by the Commissioner on 13/04/2026 at 13:33                                      |
+| Enterprise name                  | THAMANI GLOBAL                                                                                                                      |
+| Registration number              | 2026/291672/07                                                                                                                      |
+| Enterprise type                  | Private Company                                                                                                                     |
+| Enterprise status                | In Business (as at the certificate date)                                                                                            |
+| Registration date                | 09/04/2026                                                                                                                          |
+| Business start date              | 09/04/2026                                                                                                                          |
+| Financial year end               | February                                                                                                                            |
+| Jurisdiction                     | Republic of South Africa (`ZA`)                                                                                                     |
+| Supplied by                      | Programme sponsor, 10 October 2026                                                                                                  |
 | Persons named on the certificate | Two persons are listed as active directors, both appointed 09/04/2026. Names and personal details are deliberately not copied here. |
-| Reviewer sign-off | PENDING |
+| Reviewer sign-off                | PENDING                                                                                                                             |
 
 The source PDF is held by the sponsor and is deliberately not committed. It lists directors with identity numbers, dates of birth and residential and postal addresses, which are personal information. The certificate also carries a tax number; it is deliberately not recorded here either, because the registry needs only the identity facts above.
 

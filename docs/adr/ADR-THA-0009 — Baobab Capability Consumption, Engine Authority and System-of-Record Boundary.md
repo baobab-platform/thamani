@@ -337,45 +337,45 @@ A business process may span many engines without any one engine owning the entir
 
 The target authority matrix SHALL be:
 
-| Domain concern | Primary authority |
-|---|---|
-| Thamani service portfolio and divisional offering | Thamani |
-| Customer logistics RFQ | Thamani |
-| Customer-facing logistics quotation | Thamani |
-| Customer sell price | Thamani commercial domain |
-| Thamani margin policy | Thamani commercial domain |
-| Customer service order | Thamani |
-| Canonical organisation | Control Plane |
-| Counterparty identity | Control Plane |
-| Platform tenant/legal-entity context | Control Plane |
-| Capability grants/bindings/resolution | Control Plane |
-| Human/workload authentication | IAM |
-| Shipment execution | TMS |
-| Consignment execution | TMS |
-| Transport planning | TMS |
-| Routes/corridors operational model | TMS |
-| Transport movements/legs/calls | TMS |
-| Carrier booking | TMS |
-| Capacity/resource assignment | TMS |
-| Transport events | TMS |
-| Customs case workflow | Trade Docs |
-| Customs declaration workflow | Trade Docs |
-| Trade-document lifecycle | Trade Docs |
-| Document dossier | Trade Docs |
-| Customs authority messages | Trade Docs projection of authority facts |
-| Regulatory applicability | Regulations |
-| Regulatory decision | Regulations |
-| Customs/product classification decision | Regulations |
-| Regulatory requirement determination | Regulations |
-| Accounting | ERP |
-| AR/AP | ERP |
-| General ledger | ERP |
-| Financial asset accounting | ERP |
-| Final financial actual costs | ERP |
-| Authentication/session state | IAM |
-| Public/editorial content | CMS |
-| Predictive/logistics intelligence | Pulse |
-| Commerce/cart/order where applicable | Trade |
+| Domain concern                                    | Primary authority                        |
+| ------------------------------------------------- | ---------------------------------------- |
+| Thamani service portfolio and divisional offering | Thamani                                  |
+| Customer logistics RFQ                            | Thamani                                  |
+| Customer-facing logistics quotation               | Thamani                                  |
+| Customer sell price                               | Thamani commercial domain                |
+| Thamani margin policy                             | Thamani commercial domain                |
+| Customer service order                            | Thamani                                  |
+| Canonical organisation                            | Control Plane                            |
+| Counterparty identity                             | Control Plane                            |
+| Platform tenant/legal-entity context              | Control Plane                            |
+| Capability grants/bindings/resolution             | Control Plane                            |
+| Human/workload authentication                     | IAM                                      |
+| Shipment execution                                | TMS                                      |
+| Consignment execution                             | TMS                                      |
+| Transport planning                                | TMS                                      |
+| Routes/corridors operational model                | TMS                                      |
+| Transport movements/legs/calls                    | TMS                                      |
+| Carrier booking                                   | TMS                                      |
+| Capacity/resource assignment                      | TMS                                      |
+| Transport events                                  | TMS                                      |
+| Customs case workflow                             | Trade Docs                               |
+| Customs declaration workflow                      | Trade Docs                               |
+| Trade-document lifecycle                          | Trade Docs                               |
+| Document dossier                                  | Trade Docs                               |
+| Customs authority messages                        | Trade Docs projection of authority facts |
+| Regulatory applicability                          | Regulations                              |
+| Regulatory decision                               | Regulations                              |
+| Customs/product classification decision           | Regulations                              |
+| Regulatory requirement determination              | Regulations                              |
+| Accounting                                        | ERP                                      |
+| AR/AP                                             | ERP                                      |
+| General ledger                                    | ERP                                      |
+| Financial asset accounting                        | ERP                                      |
+| Final financial actual costs                      | ERP                                      |
+| Authentication/session state                      | IAM                                      |
+| Public/editorial content                          | CMS                                      |
+| Predictive/logistics intelligence                 | Pulse                                    |
+| Commerce/cart/order where applicable              | Trade                                    |
 
 ---
 
@@ -2006,46 +2006,46 @@ actor may approve financial posting
 
 The following shall guide implementation:
 
-| Object / fact | System of authority |
-|---|---|
-| Thamani RFQ | Thamani |
-| Thamani Quote | Thamani |
-| Thamani Customer Contract | Thamani / contract capability where later separated |
-| Customer Sell Price | Thamani |
-| Service Order | Thamani |
-| Canonical Organisation | CP |
-| Capability Grant | CP |
-| Capability Binding | CP |
-| Capability Resolution | CP |
-| Human Identity | IAM |
-| Shipment Execution | TMS |
-| Consignment | TMS |
-| Transport Plan | TMS |
-| Route / Corridor execution | TMS |
-| Movement / Leg / Call | TMS |
-| Booking | TMS |
-| Transport Resource assignment | TMS |
-| Transport Event | TMS |
-| Transport ETA operational projection | TMS |
-| Predictive ETA | Pulse or TMS intelligence adapter |
-| Customs Case | Trade Docs |
-| Customs Declaration | Trade Docs |
-| Trade Document | Trade Docs |
-| Document Dossier | Trade Docs |
-| Regulatory Requirement | Regulations |
-| Regulatory Decision | Regulations |
-| Classification Decision | Regulations |
-| External Customs Decision | Competent authority; projected by Trade Docs |
-| Customer Invoice | ERP |
-| Provider Payable | ERP |
-| GL Entry | ERP |
-| Fixed Asset Financial Record | ERP |
-| Public Content | CMS |
-| AI/Analytics Insight | Pulse |
-| Commerce Order | Trade |
-| Commerce Fulfilment | Trade |
-| Customer Portal Projection | Thamani |
-| Operations Control-Tower Projection | Thamani |
+| Object / fact                        | System of authority                                 |
+| ------------------------------------ | --------------------------------------------------- |
+| Thamani RFQ                          | Thamani                                             |
+| Thamani Quote                        | Thamani                                             |
+| Thamani Customer Contract            | Thamani / contract capability where later separated |
+| Customer Sell Price                  | Thamani                                             |
+| Service Order                        | Thamani                                             |
+| Canonical Organisation               | CP                                                  |
+| Capability Grant                     | CP                                                  |
+| Capability Binding                   | CP                                                  |
+| Capability Resolution                | CP                                                  |
+| Human Identity                       | IAM                                                 |
+| Shipment Execution                   | TMS                                                 |
+| Consignment                          | TMS                                                 |
+| Transport Plan                       | TMS                                                 |
+| Route / Corridor execution           | TMS                                                 |
+| Movement / Leg / Call                | TMS                                                 |
+| Booking                              | TMS                                                 |
+| Transport Resource assignment        | TMS                                                 |
+| Transport Event                      | TMS                                                 |
+| Transport ETA operational projection | TMS                                                 |
+| Predictive ETA                       | Pulse or TMS intelligence adapter                   |
+| Customs Case                         | Trade Docs                                          |
+| Customs Declaration                  | Trade Docs                                          |
+| Trade Document                       | Trade Docs                                          |
+| Document Dossier                     | Trade Docs                                          |
+| Regulatory Requirement               | Regulations                                         |
+| Regulatory Decision                  | Regulations                                         |
+| Classification Decision              | Regulations                                         |
+| External Customs Decision            | Competent authority; projected by Trade Docs        |
+| Customer Invoice                     | ERP                                                 |
+| Provider Payable                     | ERP                                                 |
+| GL Entry                             | ERP                                                 |
+| Fixed Asset Financial Record         | ERP                                                 |
+| Public Content                       | CMS                                                 |
+| AI/Analytics Insight                 | Pulse                                               |
+| Commerce Order                       | Trade                                               |
+| Commerce Fulfilment                  | Trade                                               |
+| Customer Portal Projection           | Thamani                                             |
+| Operations Control-Tower Projection  | Thamani                                             |
 
 ---
 
@@ -2225,20 +2225,20 @@ and infer everyone else must follow
 
 Thamani divisions MAY consume platform capabilities as follows:
 
-| Thamani division | Principal platform capabilities |
-|---|---|
-| Haulage | TMS, ERP, IAM, Pulse |
-| Shipping | TMS, Trade Docs, Regulations, ERP, Pulse |
-| Freight Forwarding | TMS, Trade Docs, Regulations, ERP |
-| Customs Brokerage | Trade Docs, Regulations, ERP, IAM |
-| Warehousing | Warehouse capability, ERP, IAM, TMS handoffs |
-| 3PL | TMS, warehouse capability, ERP, Trade Docs |
-| Courier | TMS, ERP, IAM |
-| Last Mile | TMS, IAM, ERP |
-| Cold Chain | TMS, Regulations, telemetry/intelligence, Trade Docs |
-| Project Logistics | TMS, Regulations, Trade Docs, ERP |
-| Cross-Border Logistics | TMS, Trade Docs, Regulations, ERP |
-| 4PL | Broad capability composition/control tower |
+| Thamani division       | Principal platform capabilities                      |
+| ---------------------- | ---------------------------------------------------- |
+| Haulage                | TMS, ERP, IAM, Pulse                                 |
+| Shipping               | TMS, Trade Docs, Regulations, ERP, Pulse             |
+| Freight Forwarding     | TMS, Trade Docs, Regulations, ERP                    |
+| Customs Brokerage      | Trade Docs, Regulations, ERP, IAM                    |
+| Warehousing            | Warehouse capability, ERP, IAM, TMS handoffs         |
+| 3PL                    | TMS, warehouse capability, ERP, Trade Docs           |
+| Courier                | TMS, ERP, IAM                                        |
+| Last Mile              | TMS, IAM, ERP                                        |
+| Cold Chain             | TMS, Regulations, telemetry/intelligence, Trade Docs |
+| Project Logistics      | TMS, Regulations, Trade Docs, ERP                    |
+| Cross-Border Logistics | TMS, Trade Docs, Regulations, ERP                    |
+| 4PL                    | Broad capability composition/control tower           |
 
 This mapping is indicative, not an entitlement registry.
 

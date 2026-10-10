@@ -1,18 +1,35 @@
-schema: { name: "nabhold-contract-consumption-lock", version: "1.0" }
-consumer: { repository: "nabhold/thamani", entity_id: "THAMANI-GLOBAL" }
-sources:
-  shared:
-    repository: "nabhold/shared"
-    commit: "0d61ba0ffa1ede9b0a0a27321792e3fd4849921f"
-    legal_entity_registry: "contracts/legal-entity/registry.yaml"
-    development_environment: "contracts/development-environment/schema.yaml"
+# The baobab-platform/shared contracts Thamani consumes
+# (EA Plan v2.0 EA-01A; schema: shared .baobab/contract-consumer-lock.schema.json).
+# Foundation checks that the commit is on Shared main and that every listed
+# contract exists and parses there, and reports drift in the job summary.
+# Migrated from the legacy nabhold-contract-consumption-lock pinned at
+# nabhold/shared@0d61ba0. Update only through an explicit pull request.
+schema: baobab-contract-consumer-lock
+version: "1.0"
+source:
+  repository: baobab-platform/shared
+  commit: 8f3f847dd6c1ecfe32deea808c298e0f910cbc59
+contracts:
+  # THAMANI-GLOBAL identity, registration evidence reference and approved
+  # product-consumption intent. Thamani never copies or redefines it.
+  - contracts/legal-entity/registry.yaml
+  - contracts/development-environment/schema.yaml
+policy:
+  updates: explicit_pull_request
+  compatibility: validate_before_merge
+# Repository-specific metadata (permitted by the schema; never replaces the keys above).
+consumer:
+  repository: baobab-platform/thamani
+  entity_id: THAMANI-GLOBAL
+external_apis:
+  # Historical retail consumer. Superseded as Thamani's target by ADR-THA-0018;
+  # kept only until the legacy storefront is decommissioned (see
+  # docs/compatibility/medusa-2.21.2-consumer-audit.md). Not a Shared contract.
   trade:
-    {
-      repository: "nabhold/baobab-trade",
-      commit: "e6bfa4ae7ebdc6342ea7e1e39b7054587175d183",
-      api: "Medusa v2 Store API",
-    }
+    repository: baobab-platform/baobab-trade
+    api: "Medusa v2 Store API"
+    status: LEGACY_SUPERSEDED_BY_ADR_THA_0018
 gaps:
-  - "Shared has not published a canonical commerce Store API package."
-  - "Trade has not published configured payment, shipping, wishlist, review, recommendation, or reorder contracts."
-  - "Shared has not published a release of @nabhold/supplier-domain (packages/supplier-domain) yet; docs/supplier-onboarding/domain-model.md is the interim reference until this lock can pin a real version (see ADR-0002)."
+  - "Shared has not published a canonical commerce Store API package; the legacy storefront integrates against Baobab Trade's Medusa v2 Store API directly."
+  - "ADR-THA-0018 makes organisation-centric B2B logistics capabilities (RFQ, service orders, TMS, Trade Docs, ERP settlement) Thamani's target; none is consumed through a Shared contract yet, so none is locked here."
+  - "@baobab-platform/supplier-domain (Shared, packages/supplier-domain) is not yet released as a stable version; docs/supplier-onboarding/domain-model.md is the interim reference until this lock can pin a real version. ADR-0002 is superseded by ADR-THA-0018 (supplier onboarding becomes the logistics-provider relationship of ADR-THA-0004)."

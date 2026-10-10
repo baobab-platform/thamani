@@ -2803,16 +2803,16 @@ known exceptions
 
 Conceptually:
 
-| Requirement | Evidence | Owner | Status |
-|---|---|---|---|
-| Architecture conformance | ADR matrix | Architecture | PASS |
-| CI | workflow run | Engineering | PASS |
-| Security | security report | Security | PASS |
-| Auth | E2E tests | IAM/Thamani | PASS |
-| CP context | readiness evidence | CP | PASS |
-| TMS | provider certification | TMS | BLOCKED |
-| Backup | restore report | Operations | PASS |
-| Rollback | rehearsal | Operations | PASS |
+| Requirement              | Evidence               | Owner        | Status  |
+| ------------------------ | ---------------------- | ------------ | ------- |
+| Architecture conformance | ADR matrix             | Architecture | PASS    |
+| CI                       | workflow run           | Engineering  | PASS    |
+| Security                 | security report        | Security     | PASS    |
+| Auth                     | E2E tests              | IAM/Thamani  | PASS    |
+| CP context               | readiness evidence     | CP           | PASS    |
+| TMS                      | provider certification | TMS          | BLOCKED |
+| Backup                   | restore report         | Operations   | PASS    |
+| Rollback                 | rehearsal              | Operations   | PASS    |
 
 ---
 

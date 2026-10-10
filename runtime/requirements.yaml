@@ -1,11 +1,11 @@
-schema: { name: "nabhold-digital-estate-runtime-requirements", version: "1.0" }
+schema: { name: "baobab-digital-estate-runtime-requirements", version: "1.0" }
 application:
-  { name: "thamani", entity_id: "THAMANI-GLOBAL", kind: "b2c-digital-estate", container_port: 3000 }
+  { name: "thamani", entity_id: "THAMANI-GLOBAL", kind: "digital-estate", container_port: 3000 }
 ownership:
   {
-    application: "nabhold/thamani",
-    commerce: "nabhold/baobab-trade",
-    production_infrastructure: "nabhold/infrastructure",
+    application: "baobab-platform/thamani",
+    commerce: "baobab-platform/baobab-trade",
+    production_infrastructure: "baobab-platform/infrastructure",
   }
 dependencies:
   baobab_trade: { required: true, protocol: "HTTPS", interface: "Medusa v2 Store API" }
@@ -22,4 +22,4 @@ environment:
 constraints:
   - "Administrative Medusa credentials are prohibited."
   - "No Baobab database may be accessed directly."
-  - "Cloud resources, DNS, certificates, secret injection and production orchestration belong to nabhold/infrastructure."
+  - "Cloud resources, DNS, certificates, secret injection and production orchestration belong to baobab-platform/infrastructure."

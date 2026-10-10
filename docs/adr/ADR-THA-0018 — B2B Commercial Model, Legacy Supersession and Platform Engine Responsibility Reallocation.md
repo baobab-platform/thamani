@@ -474,20 +474,20 @@ ADR-THA-0004 remains authoritative for contextual logistics-provider relationshi
 
 The twelve business divisions established by ADR-THA-0003 remain:
 
-| # | Division |
-|---:|---|
-| 1 | Haulage |
-| 2 | Shipping |
-| 3 | Freight Forwarding |
-| 4 | Customs Brokerage |
-| 5 | Warehousing |
-| 6 | 3PL |
-| 7 | Courier |
-| 8 | Last Mile |
-| 9 | Cold Chain |
-| 10 | Project Logistics |
-| 11 | Cross-Border Logistics |
-| 12 | 4PL |
+|   # | Division               |
+| --: | ---------------------- |
+|   1 | Haulage                |
+|   2 | Shipping               |
+|   3 | Freight Forwarding     |
+|   4 | Customs Brokerage      |
+|   5 | Warehousing            |
+|   6 | 3PL                    |
+|   7 | Courier                |
+|   8 | Last Mile              |
+|   9 | Cold Chain             |
+|  10 | Project Logistics      |
+|  11 | Cross-Border Logistics |
+|  12 | 4PL                    |
 
 They remain business divisions of:
 
@@ -677,40 +677,40 @@ It SHALL consume reusable platform engines for canonical execution.
 
 # 18. Responsibility Reallocation — Summary
 
-| Concern | Historical Thamani ADR | Current authority |
-|---|---|---|
-| B2B customer relationship | legacy B2C / THA-0003 | **Thamani** |
-| RFQ / quotation / customer contract | THA-0006 | **Thamani** |
-| Customer sell price / margin | THA-0006 | **Thamani** |
-| Logistics service composition | THA-0003/0008/0009 | **Thamani** |
-| LogisticsShipment | THA-0005 | **Baobab TMS** |
-| Consignment | THA-0005 | **Baobab TMS** |
-| TransportPlan | THA-0005 | **Baobab TMS** |
-| TransportRoute | THA-0005 | **Baobab TMS** |
-| TransportMovement | THA-0005 | **Baobab TMS** |
-| TransportLeg / Call | THA-0005 | **Baobab TMS** |
-| Transport events | THA-0005 | **Baobab TMS** |
-| Transport booking | THA-0005/0007 | **Baobab TMS** |
-| Fleet operational semantics | THA-0007 | **Baobab TMS** |
-| Transport means/equipment | THA-0007 | **Baobab TMS** |
-| Capacity/resource assignment | THA-0007 | **Baobab TMS** |
-| Transport custody | THA-0005 | **Baobab TMS** |
-| Physical delivery | THA-0005 | **Baobab TMS** |
-| TradeDocument | THA-0008 and older Trade architecture | **Baobab Trade Docs** |
-| Document version/content | implicit previously | **Baobab Trade Docs** |
-| Document dossier | THA-0008 | **Baobab Trade Docs** |
-| CustomsCase | THA-0008 | **Baobab Trade Docs** |
-| Customs declaration workflow | THA-0008 | **Baobab Trade Docs** |
-| Authority submission/response | THA-0008 | **Baobab Trade Docs** |
-| Regulatory applicability | THA-0008 | **Baobab Regulations** |
-| Regulatory decisions | THA-0008 | **Baobab Regulations** |
-| Sovereign Customs decisions | THA-0008 | **External competent authority** |
-| Financial accounting | various | **Baobab ERP** |
-| Organisation identity | earlier supplier models | **Control Plane** |
-| Capability/provider resolution | THA-0009 | **Control Plane** |
-| Authentication | various | **Baobab IAM** |
-| Public/editorial content | THA-0014 | **Baobab CMS** |
-| Predictive intelligence | THA-0013/0014 | **Baobab Pulse** |
+| Concern                             | Historical Thamani ADR                | Current authority                |
+| ----------------------------------- | ------------------------------------- | -------------------------------- |
+| B2B customer relationship           | legacy B2C / THA-0003                 | **Thamani**                      |
+| RFQ / quotation / customer contract | THA-0006                              | **Thamani**                      |
+| Customer sell price / margin        | THA-0006                              | **Thamani**                      |
+| Logistics service composition       | THA-0003/0008/0009                    | **Thamani**                      |
+| LogisticsShipment                   | THA-0005                              | **Baobab TMS**                   |
+| Consignment                         | THA-0005                              | **Baobab TMS**                   |
+| TransportPlan                       | THA-0005                              | **Baobab TMS**                   |
+| TransportRoute                      | THA-0005                              | **Baobab TMS**                   |
+| TransportMovement                   | THA-0005                              | **Baobab TMS**                   |
+| TransportLeg / Call                 | THA-0005                              | **Baobab TMS**                   |
+| Transport events                    | THA-0005                              | **Baobab TMS**                   |
+| Transport booking                   | THA-0005/0007                         | **Baobab TMS**                   |
+| Fleet operational semantics         | THA-0007                              | **Baobab TMS**                   |
+| Transport means/equipment           | THA-0007                              | **Baobab TMS**                   |
+| Capacity/resource assignment        | THA-0007                              | **Baobab TMS**                   |
+| Transport custody                   | THA-0005                              | **Baobab TMS**                   |
+| Physical delivery                   | THA-0005                              | **Baobab TMS**                   |
+| TradeDocument                       | THA-0008 and older Trade architecture | **Baobab Trade Docs**            |
+| Document version/content            | implicit previously                   | **Baobab Trade Docs**            |
+| Document dossier                    | THA-0008                              | **Baobab Trade Docs**            |
+| CustomsCase                         | THA-0008                              | **Baobab Trade Docs**            |
+| Customs declaration workflow        | THA-0008                              | **Baobab Trade Docs**            |
+| Authority submission/response       | THA-0008                              | **Baobab Trade Docs**            |
+| Regulatory applicability            | THA-0008                              | **Baobab Regulations**           |
+| Regulatory decisions                | THA-0008                              | **Baobab Regulations**           |
+| Sovereign Customs decisions         | THA-0008                              | **External competent authority** |
+| Financial accounting                | various                               | **Baobab ERP**                   |
+| Organisation identity               | earlier supplier models               | **Control Plane**                |
+| Capability/provider resolution      | THA-0009                              | **Control Plane**                |
+| Authentication                      | various                               | **Baobab IAM**                   |
+| Public/editorial content            | THA-0014                              | **Baobab CMS**                   |
+| Predictive intelligence             | THA-0013/0014                         | **Baobab Pulse**                 |
 
 ---
 
@@ -718,25 +718,25 @@ It SHALL consume reusable platform engines for canonical execution.
 
 The following classifications SHALL become normative.
 
-| ADR | Status after ADR-THA-0018 | Decision |
-|---|---|---|
-| ADR-0001 — Next.js B2C Digital Estate | **Superseded** | B2C/storefront/Medusa commercial architecture retired. Selected frontend engineering decisions retained. |
-| ADR-0002 — Supplier Onboarding Portal | **Superseded** | B2C supplier-estate model replaced by organisation-centric logistics-provider architecture in THA-0004. |
-| ADR-THA-0003 | **Accepted as Modified by THA-0018** | Logistics-enterprise boundary remains; target model is now explicitly B2B. |
-| ADR-THA-0004 | **Retained** | Canonical organisation, counterparty and logistics-provider qualification remain correct. |
-| ADR-THA-0005 | **Superseded in Part** | Reusable shipment/consignment/planning/movement/execution model is reallocated to `baobab-tms`. |
-| ADR-THA-0006 | **Retained with Reconciliation** | B2B RFQ, quote, contract, rate, approval and margin remain Thamani responsibilities. |
-| ADR-THA-0007 | **Superseded in Part** | Reusable fleet/equipment/capacity/resource/execution semantics reallocated to `baobab-tms`. |
-| ADR-THA-0008 | **Superseded in Part** | Cross-border service composition remains Thamani; transport → TMS; documents/Customs workflow → Trade Docs; regulatory decisions → Regulations. |
-| ADR-THA-0009 | **Retained** | Authority and system-of-record boundary remains governing. |
-| ADR-THA-0010 | **Retained** | Warehousing/3PL customer-service composition remains Thamani; execution remains provider-neutral. |
-| ADR-THA-0011 | **Retained** | Special cargo remains Thamani service composition over TMS/Regulations/Trade Docs/etc. |
-| ADR-THA-0012 | **Retained** | Project Logistics remains Thamani project/service orchestration over reusable capabilities. |
-| ADR-THA-0013 | **Retained** | 4PL remains Thamani orchestration; authoritative operational facts remain distributed. |
-| ADR-THA-0014 | **Superseded in Part** | Digital Estate retained but Customer Experience becomes explicitly organisation-centric B2B. |
-| ADR-THA-0015 | **Retained** | Claims architecture remains; B2B organisation/contract context governs normal use. |
-| ADR-THA-0016 | **Retained** | Communication architecture remains; organisation roles/contacts are primary recipient model. |
-| ADR-THA-0017 | **Accepted as Modified by THA-0018** | Migration target is explicitly a B2B logistics Digital Estate. |
+| ADR                                   | Status after ADR-THA-0018            | Decision                                                                                                                                        |
+| ------------------------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| ADR-0001 — Next.js B2C Digital Estate | **Superseded**                       | B2C/storefront/Medusa commercial architecture retired. Selected frontend engineering decisions retained.                                        |
+| ADR-0002 — Supplier Onboarding Portal | **Superseded**                       | B2C supplier-estate model replaced by organisation-centric logistics-provider architecture in THA-0004.                                         |
+| ADR-THA-0003                          | **Accepted as Modified by THA-0018** | Logistics-enterprise boundary remains; target model is now explicitly B2B.                                                                      |
+| ADR-THA-0004                          | **Retained**                         | Canonical organisation, counterparty and logistics-provider qualification remain correct.                                                       |
+| ADR-THA-0005                          | **Superseded in Part**               | Reusable shipment/consignment/planning/movement/execution model is reallocated to `baobab-tms`.                                                 |
+| ADR-THA-0006                          | **Retained with Reconciliation**     | B2B RFQ, quote, contract, rate, approval and margin remain Thamani responsibilities.                                                            |
+| ADR-THA-0007                          | **Superseded in Part**               | Reusable fleet/equipment/capacity/resource/execution semantics reallocated to `baobab-tms`.                                                     |
+| ADR-THA-0008                          | **Superseded in Part**               | Cross-border service composition remains Thamani; transport → TMS; documents/Customs workflow → Trade Docs; regulatory decisions → Regulations. |
+| ADR-THA-0009                          | **Retained**                         | Authority and system-of-record boundary remains governing.                                                                                      |
+| ADR-THA-0010                          | **Retained**                         | Warehousing/3PL customer-service composition remains Thamani; execution remains provider-neutral.                                               |
+| ADR-THA-0011                          | **Retained**                         | Special cargo remains Thamani service composition over TMS/Regulations/Trade Docs/etc.                                                          |
+| ADR-THA-0012                          | **Retained**                         | Project Logistics remains Thamani project/service orchestration over reusable capabilities.                                                     |
+| ADR-THA-0013                          | **Retained**                         | 4PL remains Thamani orchestration; authoritative operational facts remain distributed.                                                          |
+| ADR-THA-0014                          | **Superseded in Part**               | Digital Estate retained but Customer Experience becomes explicitly organisation-centric B2B.                                                    |
+| ADR-THA-0015                          | **Retained**                         | Claims architecture remains; B2B organisation/contract context governs normal use.                                                              |
+| ADR-THA-0016                          | **Retained**                         | Communication architecture remains; organisation roles/contacts are primary recipient model.                                                    |
+| ADR-THA-0017                          | **Accepted as Modified by THA-0018** | Migration target is explicitly a B2B logistics Digital Estate.                                                                                  |
 
 ---
 
@@ -1255,28 +1255,28 @@ What changes is the classification of authority.
 
 # 38. THA-0008 — Current Responsibility Split
 
-| Cross-border concern | Current authority |
-|---|---|
-| Customer cross-border service | **Thamani** |
-| Customer contract / quote | **Thamani** |
-| Cross-border service composition | **Thamani** |
-| Physical cargo transport | **Baobab TMS** |
-| LogisticsShipment / Consignment | **Baobab TMS** |
-| Route / movement | **Baobab TMS** |
-| Transport custody | **Baobab TMS** |
-| Trade documents | **Baobab Trade Docs** |
-| Document versions/content | **Baobab Trade Docs** |
-| Document dossier | **Baobab Trade Docs** |
-| CustomsCase | **Baobab Trade Docs** |
-| Customs declaration workflow | **Baobab Trade Docs** |
-| Customs submission | **Baobab Trade Docs** |
-| Authority-response projection | **Baobab Trade Docs** |
-| Regulatory applicability | **Baobab Regulations** |
-| Regulatory requirements | **Baobab Regulations** |
-| Regulatory decisions | **Baobab Regulations** |
-| Sovereign Customs decision | **External Customs authority** |
-| Accounting / actual financial consequence | **Baobab ERP** |
-| Platform context / capability resolution | **Control Plane** |
+| Cross-border concern                      | Current authority              |
+| ----------------------------------------- | ------------------------------ |
+| Customer cross-border service             | **Thamani**                    |
+| Customer contract / quote                 | **Thamani**                    |
+| Cross-border service composition          | **Thamani**                    |
+| Physical cargo transport                  | **Baobab TMS**                 |
+| LogisticsShipment / Consignment           | **Baobab TMS**                 |
+| Route / movement                          | **Baobab TMS**                 |
+| Transport custody                         | **Baobab TMS**                 |
+| Trade documents                           | **Baobab Trade Docs**          |
+| Document versions/content                 | **Baobab Trade Docs**          |
+| Document dossier                          | **Baobab Trade Docs**          |
+| CustomsCase                               | **Baobab Trade Docs**          |
+| Customs declaration workflow              | **Baobab Trade Docs**          |
+| Customs submission                        | **Baobab Trade Docs**          |
+| Authority-response projection             | **Baobab Trade Docs**          |
+| Regulatory applicability                  | **Baobab Regulations**         |
+| Regulatory requirements                   | **Baobab Regulations**         |
+| Regulatory decisions                      | **Baobab Regulations**         |
+| Sovereign Customs decision                | **External Customs authority** |
+| Accounting / actual financial consequence | **Baobab ERP**                 |
+| Platform context / capability resolution  | **Control Plane**              |
 
 ---
 

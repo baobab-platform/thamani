@@ -10,10 +10,16 @@ on:
 
 permissions:
   contents: read
+  packages: read
+  actions: read
+  security-events: write
 
 jobs:
   foundation:
-    uses: nabhold/shared/.github/workflows/foundation-repository-gates.yml@c518b9aa7be1e67c2b9d360c75a97123ee47382f
+    uses: baobab-platform/shared/.github/workflows/foundation-repository-gates.yml@31de2bc3dcd56128c019c640dc7e12c10ae9ca69 # v2.3.0
     with:
+      foundation_ref: "31de2bc3dcd56128c019c640dc7e12c10ae9ca69"
+      profile: full
       dockerfile: "Dockerfile"
       build_context: "."
+      dependency_review_enabled: true

@@ -1,4 +1,24 @@
 packages: []
+# Patched transitive leaves (pnpm audit --audit-level high):
+#   sharp                CVE-2026-96889      GHSA-wq5f-xc86-pv6w
+#   source-map-js        >=1.2.2             GHSA-68fv-2mgg-jv7q
+#   brace-expansion      1.x >=1.1.21, 5.x >=5.0.12 (DoS via uncontrolled recursion)
+#   undici               >=8.10.2            (DoS, TLS validation bypass, cache poisoning)
+overrides:
+  sharp: 0.35.5
+  source-map-js: 1.2.2
+  "brace-expansion@<1.1.21": 1.1.21
+  "brace-expansion@>=4.0.0 <5.0.12": 5.0.12
+  "undici@>=8.0.0 <8.10.2": 8.10.2
+# braces <=3.0.3 (GHSA-vfj7-8cjw-p6xm, stack exhaustion via deeply nested patterns) has NO patched
+# release: 3.0.3 is the latest. It is reachable only as a development dependency
+# (eslint-config-next > @next/eslint-plugin-next > fast-glob > micromatch > braces), processes
+# patterns from this repository's own lint configuration, and is absent from the production image
+# (the runtime stage copies only .next/standalone). Accepted narrowly by advisory id rather than by
+# waiving the whole audit gate. Re-check when fast-glob/micromatch publish a fixed braces.
+auditConfig:
+  ignoreGhsas:
+    - GHSA-vfj7-8cjw-p6xm
 allowBuilds:
   esbuild: true
   unrs-resolver: true

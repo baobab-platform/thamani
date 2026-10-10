@@ -1,6 +1,6 @@
 {
-  "name": "Thamani B2C Digital Estate",
-  "image": "ghcr.io/nabhold/baobab-dev:1.4.2-frontend",
+  "name": "Thamani Digital Estate",
+  "image": "ghcr.io/baobab-platform/baobab-dev:1.4.4-frontend",
   "remoteUser": "vscode",
   "forwardPorts": [3000],
   "postCreateCommand": "baobab-verify --contract && pnpm install --frozen-lockfile",

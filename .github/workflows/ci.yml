@@ -8,9 +8,11 @@ concurrency: { group: "ci-${{ github.workflow }}-${{ github.ref }}", cancel-in-p
 jobs:
   verify:
     runs-on: ubuntu-26.04
-    container: { image: "ghcr.io/nabhold/baobab-dev:1.4.2-frontend", options: "--user 0" }
+    container: { image: "ghcr.io/baobab-platform/baobab-dev:1.4.4-frontend", options: "--user 0" }
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Audit legacy Medusa Store consumers against ADR-THA-0018 (static only)
+        run: node scripts/verify-medusa-2212-legacy.mjs
       - run: pnpm install --frozen-lockfile
       - run: pnpm format:check
       - run: pnpm lint
@@ -23,7 +25,7 @@ jobs:
           NEXT_PUBLIC_SITE_URL: http://localhost:3000
           NEXT_PUBLIC_MARKET: za
           NEXT_PUBLIC_DEFAULT_REGION_ID: reg_ci_build_only
-      - run: test -f contracts.lock.yaml && test -f runtime/requirements.yaml && test -f .nabhold/environment.yaml
+      - run: test -f contracts.lock.yaml && test -f runtime/requirements.yaml && test -f .baobab/environment.yaml
   image:
     runs-on: ubuntu-26.04
     steps:

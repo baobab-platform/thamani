@@ -2486,18 +2486,18 @@ The warehouse provider SHALL consume/reference TMS and Trade Docs identifiers ra
 
 Following TMS-0002:
 
-| Fact | Authority |
-|---|---|
-| LogisticsShipment | TMS |
-| Consignment | TMS |
-| CargoItem transport projection | TMS |
-| HandlingUnit transport projection | TMS |
-| TransportMovement | TMS |
-| TransportLeg | TMS |
-| TransportCall | TMS |
-| TransportEvent | TMS |
-| Transport custody | TMS |
-| Delivery fact | TMS |
+| Fact                              | Authority |
+| --------------------------------- | --------- |
+| LogisticsShipment                 | TMS       |
+| Consignment                       | TMS       |
+| CargoItem transport projection    | TMS       |
+| HandlingUnit transport projection | TMS       |
+| TransportMovement                 | TMS       |
+| TransportLeg                      | TMS       |
+| TransportCall                     | TMS       |
+| TransportEvent                    | TMS       |
+| Transport custody                 | TMS       |
+| Delivery fact                     | TMS       |
 
 ---
 
@@ -2505,52 +2505,52 @@ Following TMS-0002:
 
 Following TDOC-0002:
 
-| Fact | Authority |
-|---|---|
-| TradeDocument | Trade Docs |
-| DocumentVersion | Trade Docs |
-| ContentArtifact association | Trade Docs |
-| Document relationships | Trade Docs |
-| Document lifecycle | Trade Docs |
-| Documentary provenance | Trade Docs |
+| Fact                                    | Authority                 |
+| --------------------------------------- | ------------------------- |
+| TradeDocument                           | Trade Docs                |
+| DocumentVersion                         | Trade Docs                |
+| ContentArtifact association             | Trade Docs                |
+| Document relationships                  | Trade Docs                |
+| Document lifecycle                      | Trade Docs                |
+| Documentary provenance                  | Trade Docs                |
 | Transfer-control state where applicable | Trade Docs / legal regime |
-| Underlying business fact | Owning source domain |
+| Underlying business fact                | Owning source domain      |
 
 ---
 
 # 111. Warehouse Source-of-Truth Matrix
 
-| Fact | Authority |
-|---|---|
+| Fact                       | Authority                    |
+| -------------------------- | ---------------------------- |
 | Physical warehouse receipt | Warehouse execution provider |
-| Putaway | Warehouse execution provider |
-| Bin/location movement | Warehouse execution provider |
-| Physical warehouse stock | Warehouse execution provider |
-| Warehouse pick | Warehouse execution provider |
-| Warehouse pack | Warehouse execution provider |
-| Warehouse staging | Warehouse execution provider |
-| Warehouse stock count | Warehouse execution provider |
+| Putaway                    | Warehouse execution provider |
+| Bin/location movement      | Warehouse execution provider |
+| Physical warehouse stock   | Warehouse execution provider |
+| Warehouse pick             | Warehouse execution provider |
+| Warehouse pack             | Warehouse execution provider |
+| Warehouse staging          | Warehouse execution provider |
+| Warehouse stock count      | Warehouse execution provider |
 | Physical warehouse release | Warehouse execution provider |
 
 ---
 
 # 112. Other Authority Matrix
 
-| Fact | Authority |
-|---|---|
-| 3PL customer contract | Thamani |
-| Customer warehouse quote | Thamani |
-| Customer SLA | Thamani |
-| Customer service order | Thamani |
+| Fact                        | Authority                                                 |
+| --------------------------- | --------------------------------------------------------- |
+| 3PL customer contract       | Thamani                                                   |
+| Customer warehouse quote    | Thamani                                                   |
+| Customer SLA                | Thamani                                                   |
+| Customer service order      | Thamani                                                   |
 | Inventory ownership context | Canonical inventory model / authoritative business source |
-| Financial inventory | ERP |
-| Inventory valuation | ERP |
-| Commerce reservation | Trade where applicable |
-| Commercial ATP | applicable commercial provider |
-| CustomsCase | Trade Docs |
-| Customs authority decision | External Customs authority, projected by Trade Docs |
-| Regulatory requirement | Regulations |
-| Customer portal projection | Thamani |
+| Financial inventory         | ERP                                                       |
+| Inventory valuation         | ERP                                                       |
+| Commerce reservation        | Trade where applicable                                    |
+| Commercial ATP              | applicable commercial provider                            |
+| CustomsCase                 | Trade Docs                                                |
+| Customs authority decision  | External Customs authority, projected by Trade Docs       |
+| Regulatory requirement      | Regulations                                               |
+| Customer portal projection  | Thamani                                                   |
 
 ---
 

@@ -325,18 +325,18 @@ send-customer-delay-sms
 
 Examples:
 
-| Fact | Authority |
-|---|---|
-| Movement delayed | TMS |
-| Delivery completed | TMS |
-| Warehouse discrepancy | Warehouse provider |
-| Customs hold | Trade Docs / external authority |
-| Regulatory block | Regulations |
-| Quote issued | Thamani commercial domain |
-| Claim received | Thamani Claims |
-| Invoice posted | ERP |
-| Provider qualification expired | Thamani qualification domain |
-| Network disruption identified | Thamani 4PL management domain |
+| Fact                           | Authority                       |
+| ------------------------------ | ------------------------------- |
+| Movement delayed               | TMS                             |
+| Delivery completed             | TMS                             |
+| Warehouse discrepancy          | Warehouse provider              |
+| Customs hold                   | Trade Docs / external authority |
+| Regulatory block               | Regulations                     |
+| Quote issued                   | Thamani commercial domain       |
+| Claim received                 | Thamani Claims                  |
+| Invoice posted                 | ERP                             |
+| Provider qualification expired | Thamani qualification domain    |
+| Network disruption identified  | Thamani 4PL management domain   |
 
 Communications SHALL consume these facts.
 
