@@ -41,7 +41,7 @@ must not lose what they already entered.
   verification need one to exist first; this is a real prerequisite, not a
   design choice deferred by convenience.
 - **No database.** `SUPPLIER_DB_URL` and its migrations do not exist yet.
-  `nabhold/zuribeans` ADR-0006 is the reference for how to introduce one
+  `baobab-platform/zuribeans` ADR-0006 is the reference for how to introduce one
   (estate-owned, never shared with or copied from any Baobab engine's
   database).
 - **No document storage decision.** Certification and compliance document
@@ -49,9 +49,9 @@ must not lose what they already entered.
 
 ## Internal review
 
-Not implemented. `@nabhold/supplier-domain`'s lifecycle already models
+Not implemented. `@baobab-platform/supplier-domain`'s lifecycle already models
 `under_review`, `more_information_required`, `sample_required`, and
 `qualification` so a future review surface has real states to transition
 through rather than inventing them under time pressure later — the same
-reasoning `nabhold/zuribeans` ADR-0006 gives for building its lifecycle
+reasoning `baobab-platform/zuribeans` ADR-0006 gives for building its lifecycle
 ahead of the UI that exercises it.

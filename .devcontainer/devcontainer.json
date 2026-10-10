@@ -1,5 +1,5 @@
 {
-  "name": "Thamani B2C Digital Estate",
+  "name": "Thamani Digital Estate",
   "image": "ghcr.io/baobab-platform/baobab-dev:1.4.4-frontend",
   "remoteUser": "vscode",
   "forwardPorts": [3000],
