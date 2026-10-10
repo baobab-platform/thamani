@@ -1,4 +1,9 @@
 packages: []
+# Patched transitive leaves (pnpm audit --prod --audit-level high): sharp CVE-2026-96889
+# (GHSA-wq5f-xc86-pv6w) and source-map-js >=1.2.2 (GHSA-68fv-2mgg-jv7q).
+overrides:
+  sharp: 0.35.5
+  source-map-js: 1.2.2
 allowBuilds:
   esbuild: true
   unrs-resolver: true
