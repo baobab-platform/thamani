@@ -2,13 +2,13 @@ packages: []
 # Patched transitive leaves (pnpm audit --audit-level high):
 #   sharp                CVE-2026-96889      GHSA-wq5f-xc86-pv6w
 #   source-map-js        >=1.2.2             GHSA-68fv-2mgg-jv7q
-#   brace-expansion      1.x >=1.1.20, 5.x >=5.0.11 (DoS via uncontrolled recursion)
+#   brace-expansion      1.x >=1.1.21, 5.x >=5.0.12 (DoS via uncontrolled recursion)
 #   undici               >=8.10.2            (DoS, TLS validation bypass, cache poisoning)
 overrides:
   sharp: 0.35.5
   source-map-js: 1.2.2
-  "brace-expansion@<1.1.20": 1.1.20
-  "brace-expansion@>=4.0.0 <5.0.11": 5.0.11
+  "brace-expansion@<1.1.21": 1.1.21
+  "brace-expansion@>=4.0.0 <5.0.12": 5.0.12
   "undici@>=8.0.0 <8.10.2": 8.10.2
 # braces <=3.0.3 (GHSA-vfj7-8cjw-p6xm, stack exhaustion via deeply nested patterns) has NO patched
 # release: 3.0.3 is the latest. It is reachable only as a development dependency
