@@ -15,7 +15,7 @@ jobs:
         run: node scripts/verify-medusa-2212-legacy.mjs
       - run: pnpm install --frozen-lockfile
       - name: Verify Foundation v2 configuration coherence
-        run: node --test scripts/verify-foundation-v2.test.mjs
+        run: node --test scripts/verify-foundation-v2.node.mjs
       - run: pnpm format:check
       - run: pnpm lint
       - run: pnpm typecheck
