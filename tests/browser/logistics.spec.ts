@@ -1,7 +1,8 @@
 import { test, expect } from "@playwright/test"
 import { createRequire } from "node:module"
+import { resolve } from "node:path"
 import type { AxeResults } from "axe-core"
-const require = createRequire(import.meta.url)
+const require = createRequire(resolve(process.cwd(), "package.json"))
 
 test("logistics tabs work with keyboard and preserve independent denials", async ({ page }) => {
   await page.goto("/")
