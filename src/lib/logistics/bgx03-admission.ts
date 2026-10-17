@@ -46,13 +46,9 @@ export type AdmissionResult =
   | Readonly<{ access: "restricted"; explanation: string }>
   | Readonly<{
       access: "authorised"
-      principalId: string
-      tenantId: string
-      organisationId: string
       shipmentReference: string
       sourceReference: string
       asOf: string
-      bindingReference: string
     }>
 
 function bounded(value: unknown): value is string {
@@ -135,13 +131,9 @@ export async function admitShipmentEvidence(
     // by spreading its unknown transport/provider metadata into the browser.
     return Object.freeze({
       access: "authorised",
-      principalId: identity.principalId,
-      tenantId: cp.tenantId,
-      organisationId: cp.organisationId,
       shipmentReference: shipment.shipmentReference,
       sourceReference: shipment.sourceReference,
       asOf: shipment.asOf,
-      bindingReference: cp.bindingReference,
     })
   } catch {
     // Includes actual IAM, CP or TMS service outages and malformed transport.
