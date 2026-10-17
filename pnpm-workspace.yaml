@@ -22,3 +22,9 @@ auditConfig:
 allowBuilds:
   esbuild: true
   unrs-resolver: true
+
+# Verified immutable GitHub Packages v0.2.0, not a general freshness waiver.
+minimumReleaseAgeExclude:
+  - "@baobab-platform/experience-tokens@0.2.0"
+  - "@baobab-platform/experience-ui@0.2.0"
+  - "@baobab-platform/experience-geo-core@0.2.0"
