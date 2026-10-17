@@ -67,10 +67,9 @@ export function TrackingEvidence({ view }: { view: TrackingEvidenceView }) {
         <p>No authorised transport milestones have been provided.</p>
       )}
       <Disclosure summary="How are these logistics updates verified?">
-        This view only presents a redacted projection supplied by Thamani.
-        Transport milestones remain governed by TMS, legal and customs
-        outcomes by their respective authorities, and access by IAM and the
-        Control Plane. A reported or estimated position is not live tracking.
+        This view only presents a redacted projection supplied by Thamani. Transport milestones
+        remain governed by TMS, legal and customs outcomes by their respective authorities, and
+        access by IAM and the Control Plane. A reported or estimated position is not live tracking.
       </Disclosure>
     </section>
   )

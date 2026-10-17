@@ -53,9 +53,9 @@ describe("Thamani BXS source-labelled logistics evidence", () => {
     const result = await axe.run(container, {
       runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"] },
     })
-    expect(result.violations.filter((v) => v.impact === "critical" || v.impact === "serious")).toEqual(
-      [],
-    )
+    expect(
+      result.violations.filter((v) => v.impact === "critical" || v.impact === "serious"),
+    ).toEqual([])
   })
 
   it("fails closed if BFF sends malformed source or out-of-range coordinates", () => {
