@@ -1,3 +1,4 @@
+import { assertEvidenceTimestamp } from "@/lib/presentation/evidence-timestamp"
 import {
   Disclosure,
   FeedbackPanel,
@@ -40,6 +41,15 @@ export function TrackingEvidence({ view }: { view: TrackingEvidenceView }) {
     )
   }
 
+  if (view.visibility !== "authorised") throw new TypeError("Unknown tracking visibility")
+  // The published 0.2.0 package predates strict calendar checks. Validate here
+  // until a verified new Shared release replaces this temporary boundary.
+  if (view.observation?.observedAt != null) assertEvidenceTimestamp(view.observation.observedAt)
+  for (const item of view.milestones) {
+    if (item.timestamp !== undefined) assertEvidenceTimestamp(item.timestamp)
+    if (!["completed", "current", "pending", "uncertain"].includes(item.state))
+      throw new TypeError("Unknown milestone state")
+  }
   // Fail closed on malformed source, coordinates, timestamp or confidence.
   const attribution = view.observation
     ? locationLabel(validateLocationObservation(view.observation))

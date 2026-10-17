@@ -22,7 +22,11 @@ export function LogisticsViewTabs({
 }) {
   return (
     <Tabs.Root defaultValue="tracking" className="rounded-lg border border-[var(--color-border)]">
-      <Tabs.List aria-label="Shipment workspace views" className="flex flex-wrap gap-2 p-3">
+      <Tabs.List
+        activateOnFocus
+        aria-label="Shipment workspace views"
+        className="flex flex-wrap gap-2 p-3"
+      >
         <Tabs.Tab value="tracking" className="button focus-visible:outline-offset-2">
           Tracking
         </Tabs.Tab>

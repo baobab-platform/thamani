@@ -1,0 +1,45 @@
+body {
+  margin: 0;
+  font:
+    16px/1.5 Arial,
+    sans-serif;
+  color: #11100d;
+  background: #fffdf8;
+}
+main {
+  box-sizing: border-box;
+  max-width: 72rem;
+  margin: auto;
+  padding: 1.5rem;
+}
+button {
+  font: inherit;
+  min-height: 44px;
+  padding: 0.65rem 1rem;
+  border: 1px solid #595650;
+  border-radius: 0.5rem;
+  background: white;
+  color: #11100d;
+}
+[role="tablist"] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.75rem;
+}
+[role="tabpanel"] {
+  padding: 1rem;
+}
+button:focus-visible,
+summary:focus-visible {
+  outline: 3px solid #9b6200;
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
