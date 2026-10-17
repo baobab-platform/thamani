@@ -11,9 +11,7 @@ describe("Thamani Base UI logistics view selector", () => {
         documents={<p>Document access requires Trade Docs permissions</p>}
       />,
     )
-    expect(screen.getByRole("tab", { name: "Tracking" }).getAttribute("aria-selected")).toBe(
-      "true",
-    )
+    expect(screen.getByRole("tab", { name: "Tracking" }).getAttribute("aria-selected")).toBe("true")
     expect(screen.getByText("Last authorised observation unavailable")).toBeTruthy()
     expect(screen.getByRole("tablist", { name: "Shipment workspace views" })).toBeTruthy()
   })
