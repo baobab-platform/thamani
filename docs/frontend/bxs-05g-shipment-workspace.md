@@ -59,9 +59,9 @@ Foundation, Security, Store compatibility and pinning checks succeed.
 ## Audit hardening
 
 The follow-up rejects impossible calendar dates, unknown route-evidence values,
-unknown document states and unknown shipment visibility. The temporary local
-calendar guard must be replaced by the strict Shared API only after its next
-immutable package release is published, verified and pinned independently.
+unknown document states and unknown shipment visibility. The temporary local calendar guard is now a re-export of the strict,
+SHA512-verified `experience-geo-core@0.3.1` implementation, preserving
+the existing local import seam without duplicate parsing code.
 
 `pnpm test:logistics:browser` uses an isolated loopback Vite fixture, actual
 logistics components and exact published dependencies. Chromium tests keyboard
