@@ -1,3 +1,4 @@
+import { assertEvidenceTimestamp } from "@/lib/presentation/evidence-timestamp"
 import { FeedbackPanel, StatusLabel } from "@baobab-platform/experience-ui"
 import { LogisticsViewTabs } from "./logistics-view-tabs"
 import { TrackingEvidence, type TrackingEvidenceView } from "./tracking-evidence"
@@ -66,14 +67,9 @@ function validateIds<T extends { id: string }>(items: readonly T[]) {
   }
 }
 
+/** Reject impossible calendar dates; never let Date.parse normalise evidence. */
 function verifyTimestamp(value: string | null) {
-  if (
-    value !== null &&
-    (!/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d+)?(?:Z|[+-]\d\d:\d\d)$/.test(value) ||
-      !Number.isFinite(Date.parse(value)))
-  ) {
-    throw new TypeError("Expected an ISO timestamp with timezone")
-  }
+  if (value !== null) assertEvidenceTimestamp(value)
 }
 
 function EvidenceUnavailable({
@@ -107,6 +103,11 @@ export function RouteEvidence({ access }: { access: EvidenceAccess<RouteProjecti
   validateIds(stops)
   for (const stop of stops) {
     if (!stop.label.trim()) throw new TypeError("Missing route stop label")
+    // Runtime JSON can violate TypeScript unions. Unknown values must not
+    // fall through to the strongest evidence label.
+    if (!["planned", "carrier-reported", "verified-milestone"].includes(stop.evidence)) {
+      throw new TypeError("Unknown route evidence classification")
+    }
     verifyTimestamp(stop.asOf)
   }
   return (
@@ -153,6 +154,9 @@ export function DocumentEvidence({ access }: { access: EvidenceAccess<DocumentPr
   validateIds(records)
   for (const record of records) {
     if (!record.title.trim()) throw new TypeError("Missing document title")
+    if (!["requested", "received", "reviewing"].includes(record.state)) {
+      throw new TypeError("Unknown document evidence state")
+    }
   }
   return (
     <section aria-label="Authorised document metadata">
@@ -187,6 +191,7 @@ export function ShipmentWorkspace({ view }: { view: ShipmentWorkspaceView }) {
       />
     )
   }
+  if (view.access !== "authorised") throw new TypeError("Unknown shipment visibility")
   return (
     <section aria-label="Shipment workspace" data-bx-consumer="thamani-logistics">
       <LogisticsViewTabs

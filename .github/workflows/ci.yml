@@ -44,3 +44,30 @@ jobs:
         run: |
           bash scripts/configure-private-npm.sh
           docker build --secret id=npm_token,env=NODE_AUTH_TOKEN --build-arg MEDUSA_BACKEND_URL=http://localhost:9000 --build-arg NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=pk_ci --build-arg NEXT_PUBLIC_SITE_URL=http://localhost:3000 --build-arg NEXT_PUBLIC_DEFAULT_REGION_ID=reg_ci --tag thamani:test .
+
+  logistics-browser:
+    name: Logistics browser keyboard and accessibility
+    runs-on: ubuntu-26.04
+    timeout-minutes: 20
+    container:
+      { image: "ghcr.io/baobab-platform/baobab-dev:1.4.4-frontend-e2e", options: "--user 0" }
+    env:
+      PLAYWRIGHT_BROWSERS_PATH: /root/.cache/ms-playwright
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Configure trusted GitHub Packages credentials
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+        run: bash scripts/configure-private-npm.sh
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test:logistics:browser
+      - name: Preserve browser evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v4.7.5
+        with:
+          name: thamani-logistics-browser
+          if-no-files-found: error
+          path: |
+            playwright-report/
+            test-results/

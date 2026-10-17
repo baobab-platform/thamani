@@ -55,3 +55,15 @@ acceptance, approved logistics theme, then optional MapLibre rendering.
 
 **Exit rule:** merge source only after all normal Thamani mandatory CI,
 Foundation, Security, Store compatibility and pinning checks succeed.
+
+## Audit hardening
+
+The follow-up rejects impossible calendar dates, unknown route-evidence values,
+unknown document states and unknown shipment visibility. The temporary local
+calendar guard must be replaced by the strict Shared API only after its next
+immutable package release is published, verified and pinned independently.
+
+`pnpm test:logistics:browser` uses an isolated loopback Vite fixture, actual
+logistics components and exact published dependencies. Chromium tests keyboard
+tab movement, responsive bounds, reduced motion, axe and capability denial.
+No synthetic fixture is added to the production Next route tree.
