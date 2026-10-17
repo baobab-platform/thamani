@@ -38,3 +38,15 @@ test("whole-shipment denial exposes no tabs or route data", async ({ page }) => 
   await expect(page.getByRole("alert")).toContainText("Shipment workspace restricted")
   await expect(page.getByText("Origin hand-off")).toHaveCount(0)
 })
+
+test("neutral synthetic logistics workspace keeps reviewed viewport visuals", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" })
+  await page.goto("/")
+  await expect(page.getByRole("tablist")).toBeVisible()
+  // This is a component regression reference, not approval of the logistics
+  // production brand. Missing candidates fail until separately reviewed.
+  await expect(page.getByRole("main")).toHaveScreenshot("logistics-workspace.png", {
+    animations: "disabled",
+    maxDiffPixelRatio: 0.001,
+  })
+})
