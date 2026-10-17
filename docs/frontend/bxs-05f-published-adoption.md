@@ -2,10 +2,13 @@
 
 **Governing:** Accepted ADR-SHARED-040; ADR-THA-0014; ADR-THA-0017.
 
-Shared published GitHub Packages 0.2.0 artifacts for experience-tokens,
-experience-ui and experience-geo-core were independently SHA512 verified.
-Thamani pins those exact versions, and upgrades React/ReactDOM/type packages
-to React 19.3.0 to satisfy experience-ui's declared peer dependency.
+Shared published GitHub Packages `experience-tokens@0.3.1`,
+`experience-ui@0.3.1` and `experience-geo-core@0.3.1`
+in [release workflow 39073176845](https://github.com/baobab-platform/shared/actions/runs/39073176845).
+All three compiled exports and SHA512 archive digests were independently
+verified in [run 39073362603](https://github.com/baobab-platform/shared/actions/runs/39073362603).
+Thamani pins these exact versions. React/ReactDOM/types remain at 19.3.0
+to satisfy Shared UI's declared peer dependency.
 
 ## Strict scope
 
@@ -25,7 +28,7 @@ to React 19.3.0 to satisfy experience-ui's declared peer dependency.
 ## Security and release
 
 pnpm uses the exact registry SHA512 lock, with an age exception limited
-to independently verified Shared 0.2.0 releases. Node 24, pnpm 11.24.0
+to independently verified Shared 0.3.1 releases. Node 24, pnpm 11.24.0
 and existing PostgreSQL 17 when required remain the platform baseline.
 CI authenticates using a same-repository, job-scoped packages:read token.
 An ephemeral home npmrc is used for pnpm 11; Docker requires a BuildKit
