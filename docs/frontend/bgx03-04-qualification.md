@@ -8,7 +8,7 @@ ADR-TMS-0001/-0002 and Nabhold Go-Live v2.0 autonomy/tenant rules.
 ## Engineering increment
 
 `src/lib/logistics/bgx03-admission.ts` is a server-side admission seam to
-check independent, *trusted* IAM authentication, current CP tenant/Organisation
+check independent, _trusted_ IAM authentication, current CP tenant/Organisation
 and canonical capability authority, and TMS's **object-level** shipment decision
 before a protected BFF releases any shipment evidence.
 
@@ -24,16 +24,16 @@ tracking capability, provider publication or transport truth is asserted.
 
 ## Acceptance matrix
 
-| Case | Synthetic source preflight | Required real service acceptance |
-|---|---|---|
-| Valid IAM + CP + TMS | Three concordant, unexpired synthetic receipts | IAM issuer/signature/audience/assurance and live CP binding + native TMS object PEP |
-| Wrong audience | Denied | IAM token issued for another audience denied at actual BFF |
-| Revocation/expiry | Denied for absent/expired receipt | Current CP entitlement revocation and expiry fail without frontend redeploy |
-| Cross-tenant and Organisation | Denied for mismatching IDs | Real independent tenants with object isolation at TMS query and cache boundary |
-| Provider unavailable | Denied on exception/absence | Authenticated real transport error, no fallback to direct provider |
-| Evidence freshness | Strict source timestamp accepted, bad calendar denied | Last observed vs estimated; source, model, scope, accuracy, and retention qualified |
-| Geospatial overlays | Text-first source model in Shared BGX-02 | Published deck.gl package + real MapLibre/browser/axe/keyboard/CSP and tenant-safe tile policy |
-| Protected staging | Not exercised | Credible AWS account/IAM roles, secrets custody, cross-region/legal review, active provider |
+| Case                          | Synthetic source preflight                            | Required real service acceptance                                                               |
+| ----------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Valid IAM + CP + TMS          | Three concordant, unexpired synthetic receipts        | IAM issuer/signature/audience/assurance and live CP binding + native TMS object PEP            |
+| Wrong audience                | Denied                                                | IAM token issued for another audience denied at actual BFF                                     |
+| Revocation/expiry             | Denied for absent/expired receipt                     | Current CP entitlement revocation and expiry fail without frontend redeploy                    |
+| Cross-tenant and Organisation | Denied for mismatching IDs                            | Real independent tenants with object isolation at TMS query and cache boundary                 |
+| Provider unavailable          | Denied on exception/absence                           | Authenticated real transport error, no fallback to direct provider                             |
+| Evidence freshness            | Strict source timestamp accepted, bad calendar denied | Last observed vs estimated; source, model, scope, accuracy, and retention qualified            |
+| Geospatial overlays           | Text-first source model in Shared BGX-02              | Published deck.gl package + real MapLibre/browser/axe/keyboard/CSP and tenant-safe tile policy |
+| Protected staging             | Not exercised                                         | Credible AWS account/IAM roles, secrets custody, cross-region/legal review, active provider    |
 
 The test suite deliberately labels its `synthetic.capability.not-canonical`
 placeholder. **No new canonical logistics capability key is registered.**

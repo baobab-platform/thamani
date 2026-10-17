@@ -92,36 +92,44 @@ export async function admitShipmentEvidence(
     !bounded(input.capability) ||
     !bounded(input.expectedAudience) ||
     !Number.isFinite(input.now)
-  ) return DENIED
+  )
+    return DENIED
   try {
     const identity = await ports.identity()
     if (
-      !identity || identity.state !== "authenticated" ||
+      !identity ||
+      identity.state !== "authenticated" ||
       !bounded(identity.principalId) ||
       identity.audience !== input.expectedAudience ||
       !future(identity.expiresAt, input.now)
-    ) return DENIED
+    )
+      return DENIED
 
     const cp = await ports.cp(identity, input.capability)
     if (
-      !cp || cp.decision !== "allow" ||
+      !cp ||
+      cp.decision !== "allow" ||
       cp.principalId !== identity.principalId ||
       cp.capability !== input.capability ||
-      !bounded(cp.tenantId) || !bounded(cp.organisationId) ||
+      !bounded(cp.tenantId) ||
+      !bounded(cp.organisationId) ||
       !bounded(cp.bindingReference) ||
       !future(cp.expiresAt, input.now)
-    ) return DENIED
+    )
+      return DENIED
 
     const shipment = await ports.shipment(cp, input.shipmentReference)
     if (
-      !shipment || shipment.decision !== "allow" ||
+      !shipment ||
+      shipment.decision !== "allow" ||
       shipment.principalId !== identity.principalId ||
       shipment.tenantId !== cp.tenantId ||
       shipment.organisationId !== cp.organisationId ||
       shipment.shipmentReference !== input.shipmentReference ||
       !bounded(shipment.sourceReference) ||
       !future(shipment.expiresAt, input.now)
-    ) return DENIED
+    )
+      return DENIED
     try {
       assertEvidenceTimestamp(shipment.asOf)
     } catch {
