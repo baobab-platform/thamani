@@ -23,7 +23,7 @@ allowBuilds:
   esbuild: true
   unrs-resolver: true
 
-# Verified immutable GitHub Packages vverified 2026-10-17, not a general freshness waiver.
+# Immutable, publisher-verified Experience registry releases only.
 # Fixed-version exceptions are allowed only after independently verified
 # GitHub Packages SHA512/export run 39073362603 (2026-10-17).
 minimumReleaseAgeExclude:
