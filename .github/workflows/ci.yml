@@ -14,6 +14,8 @@ jobs:
       - name: Audit legacy Medusa Store consumers against ADR-THA-0018 (static only)
         run: node scripts/verify-medusa-2212-legacy.mjs
       - run: pnpm install --frozen-lockfile
+      - name: Verify Foundation v2 configuration coherence
+        run: node --test scripts/verify-foundation-v2.node.mjs
       - run: pnpm format:check
       - run: pnpm lint
       - run: pnpm typecheck
