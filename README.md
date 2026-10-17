@@ -1,30 +1,34 @@
 # Thamani
 
-Thamani is Nabhold's independently deployable, consumer-first B2C digital estate. It owns retail presentation, discovery, merchandising, cart and checkout experience, customer-facing content, accessibility, SEO and frontend behaviour. It is not a commerce engine.
+Thamani Global is a **B2B integrated logistics enterprise**: its primary commercial customers are organisations that buy logistics, transportation, forwarding, warehousing, customs, project-logistics, 3PL and 4PL services. This repository is Thamani's independently deployable **digital estate**. It owns the customer, partner and operations experience, presentation, content, accessibility, SEO and frontend behaviour. It is not a commerce, transport, trade-document or ERP engine.
 
-It sits in an eleven-repository ecosystem: the platform foundation (`baobab-cp`, `shared`, `infrastructure`, `baobab-dev`), Baobab engines (`baobab-trade`, `baobab-erp`, `baobab-pulse`), and independently deployed digital estates (`nabhold`, `zuribeans`, `thamani`, `equator-estate`). Thamani shares contracts and APIs with these repositories, never their source trees or databases.
+> **Governing decision:** [ADR-THA-0018](<docs/adr/ADR-THA-0018 — B2B Commercial Model, Legacy Supersession and Platform Engine Responsibility Reallocation.md>) supersedes the original B2C ecommerce model (ADR-0001) and the supplier-portal model (ADR-0002). The product catalogue, cart, checkout and search routes in `src/` are **legacy code** from that model. They are not the target customer experience and a passing legacy check does not authorise any logistics journey. See `docs/compatibility/medusa-2.21.2-consumer-audit.md`.
 
-## Architectural boundary
+## Ecosystem
 
-| Authority           | Repository               | Thamani relationship                                                                                                                                              |
-| ------------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Commerce            | `nabhold/baobab-trade`   | Consume Medusa v2 Store API; never reproduce or query commerce data directly                                                                                      |
-| Platform context    | `nabhold/baobab-cp`      | Consume authoritative tenant and entitlement context when its shared contract is published                                                                        |
-| Canonical contracts | `nabhold/shared`         | Pin identifiers and organisational standards; do not redefine them                                                                                                |
-| Supplier onboarding | `nabhold/shared`         | Adopt `@nabhold/supplier-domain` shapes/lifecycle and `contracts/supplier-onboarding/v1` events once published; Thamani owns its own supplier data (see ADR-0002) |
-| ERP                 | `nabhold/baobab-erp`     | No browser or direct integration; Trade mediates business workflows                                                                                               |
-| Intelligence        | `nabhold/baobab-pulse`   | Future explicit recommendation/merchandising APIs only                                                                                                            |
-| Infrastructure      | `nabhold/infrastructure` | Owns cloud, DNS, networks, deployment and observability infrastructure                                                                                            |
-| Development image   | `nabhold/baobab-dev`     | Supplies the pinned frontend and frontend-e2e profiles                                                                                                            |
-| B2B estate          | `nabhold/zuribeans`      | Sibling Trade consumer; no source-code dependency                                                                                                                 |
-| Corporate estate    | `nabhold/nabhold`        | Owns corporate and executive presentation                                                                                                                         |
-| Property estate     | `nabhold/equator-estate` | Independent sibling estate                                                                                                                                        |
+Thamani sits in the `baobab-platform` ecosystem. It shares contracts and APIs with these repositories, never their source trees or databases.
 
-Legal entity is the default tenant boundary but is not synonymous with tenant. The estate does not assume one storefront permanently equals one tenant or entity.
+| Authority           | Repository                       | Thamani relationship                                                                                                                       |
+| ------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Platform context    | `baobab-platform/baobab-cp`      | Control Plane: authoritative tenant, organisation and capability context. Thamani consumes capabilities through it, never around it.       |
+| Canonical contracts | `baobab-platform/shared`         | Pin identifiers and organisational standards; do not redefine them. `contracts.lock.yaml` records the exact consumed commit and contracts. |
+| Supplier onboarding | `baobab-platform/shared`         | `@baobab-platform/supplier-domain` and `contracts/supplier-onboarding/v1` are legacy reference only (see ADR-0002 and ADR-THA-0004).       |
+| Commerce (legacy)   | `baobab-platform/baobab-trade`   | Medusa v2 Store API used only by the superseded storefront; never reproduce or query commerce data directly.                               |
+| ERP                 | `baobab-platform/baobab-erp`     | No browser or direct integration; settlement and finance truth are consumed through governed capabilities.                                 |
+| Intelligence        | `baobab-platform/baobab-pulse`   | Future explicit recommendation APIs only.                                                                                                  |
+| Infrastructure      | `baobab-platform/infrastructure` | Owns cloud, DNS, networks, deployment and observability infrastructure.                                                                    |
+| Development image   | `baobab-platform/baobab-dev`     | Supplies the pinned `frontend` and `frontend-e2e` profiles.                                                                                |
+| B2B estate          | `baobab-platform/zuribeans`      | Sibling Trade consumer; no source-code dependency.                                                                                         |
+| Corporate estate    | `baobab-platform/nabhold`        | Owns corporate and executive presentation.                                                                                                 |
+| Property estate     | `baobab-platform/equator-estate` | Independent sibling estate.                                                                                                                |
 
-## Foundation vertical slice
+Per ADR-THA-0018, reusable transport execution (TMS), trade documents (Trade Docs), regulatory decisions and financial truth belong to Baobab engines. Thamani owns the logistics service composition, RFQ, quotation, contract and customer-experience layer over them.
 
-The current slice provides home, live catalogue, product detail, server-side add-to-cart, cart, search, health, SEO controls and a deliberate checkout gate. Checkout is not fabricated: Baobab Trade must first publish configured shipping, payment and order-completion contracts. Account, wishlist, reviews, recommendations and reorder follow the same evidence-before-UI rule.
+A customer organisation is not automatically a tenant, and legal entity is not synonymous with tenant. The Control Plane decides the canonical organisation and platform relationship.
+
+## Current state
+
+The deployed slice is still the legacy storefront (home, catalogue, product detail, server-side add-to-cart, cart, search, health, SEO controls and a deliberate checkout gate). Checkout is not fabricated. It is retained only until the B2B logistics experience replaces it, and is decommissioned or covered by a time-bounded compatibility smoke test per the audit above.
 
 ## Development
 
@@ -38,8 +42,8 @@ Quality gates: `pnpm format:check`, `pnpm lint`, `pnpm typecheck`, `pnpm test`, 
 
 See `docs/architecture.md`, `docs/development.md`, `docs/environment.md`, `docs/medusa-integration.md`, `docs/testing.md`, `docs/deployment.md`, and `SECURITY.md`.
 
-## Foundation 4
+## Development environment and CI
 
-Codespaces uses `ghcr.io/nabhold/baobab-dev:1.2.6-frontend`. The SHA-pinned
-Foundation gate validates contract compatibility and reproducibility and scans
-source, dependencies, secrets, configuration, and the deployable image.
+Codespaces and CI use `ghcr.io/baobab-platform/baobab-dev:1.4.4-frontend`, declared in `.baobab/environment.yaml` and `.devcontainer/devcontainer.json`. Repository capabilities are declared in `.baobab/repository.yaml`.
+
+Every GitHub Action is pinned to a full commit SHA. Reusable workflows come from `baobab-platform/shared` at the promoted Foundation release **v2.3.0** (`31de2bc3dcd56128c019c640dc7e12c10ae9ca69`); the Foundation gate validates contract compatibility and reproducibility and scans source, dependencies, secrets, configuration and the deployable image.
