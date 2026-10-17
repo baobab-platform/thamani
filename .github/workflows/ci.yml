@@ -13,6 +13,11 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Audit legacy Medusa Store consumers against ADR-THA-0018 (static only)
         run: node scripts/verify-medusa-2212-legacy.mjs
+      - name: Configure trusted GitHub Packages credentials
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+        run: bash scripts/configure-private-npm.sh
       - run: pnpm install --frozen-lockfile
       - name: Verify Foundation v2 configuration coherence
         run: node --test scripts/verify-foundation-v2.node.mjs
@@ -32,4 +37,10 @@ jobs:
     runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - run: docker build --build-arg MEDUSA_BACKEND_URL=http://localhost:9000 --build-arg NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=pk_ci --build-arg NEXT_PUBLIC_SITE_URL=http://localhost:3000 --build-arg NEXT_PUBLIC_DEFAULT_REGION_ID=reg_ci --tag thamani:test .
+      - name: Build with read-only npm registry secret
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+        run: |
+          bash scripts/configure-private-npm.sh
+          docker build --secret id=npm_token,env=NODE_AUTH_TOKEN --build-arg MEDUSA_BACKEND_URL=http://localhost:9000 --build-arg NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=pk_ci --build-arg NEXT_PUBLIC_SITE_URL=http://localhost:3000 --build-arg NEXT_PUBLIC_DEFAULT_REGION_ID=reg_ci --tag thamani:test .

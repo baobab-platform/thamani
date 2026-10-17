@@ -15,5 +15,10 @@ jobs:
     container: { image: "ghcr.io/baobab-platform/baobab-dev:1.4.4-frontend", options: "--user 0" }
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Configure trusted GitHub Packages credentials
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+        run: bash scripts/configure-private-npm.sh
       - run: pnpm install --frozen-lockfile
       - run: pnpm audit --prod --audit-level high

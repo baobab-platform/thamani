@@ -1,8 +1,14 @@
-FROM node:26.10.0-bookworm-slim AS dependencies
+# Platform baseline: baobab-dev Node 24 (not the pre-migration Node 26 image).
+FROM node:24.21.0-trixie-slim@sha256:8ec5d7557396cfe32d21c3f9c13072355ceab22b584578ca4bb28af31120cffe AS dependencies
 WORKDIR /app
 RUN npm install --global pnpm@11.24.0
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
-RUN pnpm install --frozen-lockfile
+# Read-only token exists only during this BuildKit RUN. Never in an ARG,
+# image layer, source file, application environment or the runtime stage.
+RUN --mount=type=secret,id=npm_token,required=true \
+    --mount=type=tmpfs,target=/tmp/bxs-npm-auth \
+    sh -eu -c 'printf "//npm.pkg.github.com/:_authToken=%s\n" "$(cat /run/secrets/npm_token)" > /tmp/bxs-npm-auth/.npmrc; \
+      NPM_CONFIG_USERCONFIG=/tmp/bxs-npm-auth/.npmrc pnpm install --frozen-lockfile'
 FROM dependencies AS build
 COPY . .
 ARG MEDUSA_BACKEND_URL=http://localhost:9000
@@ -12,7 +18,7 @@ ARG NEXT_PUBLIC_MARKET=za
 ARG NEXT_PUBLIC_DEFAULT_REGION_ID=reg_build_only
 ENV MEDUSA_BACKEND_URL=$MEDUSA_BACKEND_URL NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=$NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL NEXT_PUBLIC_MARKET=$NEXT_PUBLIC_MARKET NEXT_PUBLIC_DEFAULT_REGION_ID=$NEXT_PUBLIC_DEFAULT_REGION_ID
 RUN pnpm build
-FROM node:26.10.0-alpine3.23 AS runtime
+FROM node:24.21.0-trixie-slim@sha256:8ec5d7557396cfe32d21c3f9c13072355ceab22b584578ca4bb28af31120cffe AS runtime
 ARG VERSION=0.0.0-dev
 ARG REVISION=unknown
 LABEL org.opencontainers.image.source="https://github.com/baobab-platform/thamani" \
