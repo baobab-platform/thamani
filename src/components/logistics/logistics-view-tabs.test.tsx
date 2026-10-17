@@ -1,6 +1,8 @@
-import { render, screen, fireEvent } from "@testing-library/react"
-import { describe, expect, it } from "vitest"
+import { cleanup, render, screen, fireEvent } from "@testing-library/react"
+import { afterEach, describe, expect, it } from "vitest"
 import { LogisticsViewTabs } from "./logistics-view-tabs"
+
+afterEach(() => cleanup())
 
 describe("Thamani Base UI logistics view selector", () => {
   it("opens with tracking, without claiming a live TMS connection", () => {
