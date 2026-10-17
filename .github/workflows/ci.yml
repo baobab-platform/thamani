@@ -71,3 +71,4 @@ jobs:
           path: |
             playwright-report/
             test-results/
+            tests/browser/logistics.spec.ts-snapshots/
