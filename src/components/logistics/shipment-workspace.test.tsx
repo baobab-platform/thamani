@@ -47,9 +47,7 @@ function authorised(): ShipmentWorkspaceView {
       state: "available",
       data: {
         source: "Synthetic authorised document metadata",
-        records: [
-          { id: "document-1", title: "Consignment document", state: "received" },
-        ],
+        records: [{ id: "document-1", title: "Consignment document", state: "received" }],
       },
     },
   }
@@ -65,9 +63,7 @@ describe("BXS-05G per-capability shipment presentation", () => {
 
   it("defaults to source-labelled tracking without claiming a location or delivery", () => {
     render(<ShipmentWorkspace view={authorised()} />)
-    expect(screen.getByRole("tab", { name: "Tracking" }).getAttribute("aria-selected")).toBe(
-      "true",
-    )
+    expect(screen.getByRole("tab", { name: "Tracking" }).getAttribute("aria-selected")).toBe("true")
     expect(screen.getByText("Location not available")).toBeTruthy()
     expect(screen.getByText("No authorised transport milestones have been provided.")).toBeTruthy()
   })
@@ -88,9 +84,9 @@ describe("BXS-05G per-capability shipment presentation", () => {
     const report = await axe.run(container, {
       runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"] },
     })
-    expect(report.violations.filter((v) => v.impact === "critical" || v.impact === "serious")).toEqual(
-      [],
-    )
+    expect(
+      report.violations.filter((v) => v.impact === "critical" || v.impact === "serious"),
+    ).toEqual([])
   })
 
   it("keeps restricted or unavailable individual capabilities isolated", () => {
@@ -167,7 +163,9 @@ describe("BXS-05G per-capability shipment presentation", () => {
       ),
     ).toThrow(/unique/)
     const { container } = render(
-      <DocumentEvidence access={{ state: "available", data: { source: "Documents", records: [] } }} />,
+      <DocumentEvidence
+        access={{ state: "available", data: { source: "Documents", records: [] } }}
+      />,
     )
     expect(container.textContent).toContain("No documents are present")
     expect(container.querySelector("a")).toBeNull()

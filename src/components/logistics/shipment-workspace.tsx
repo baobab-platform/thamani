@@ -69,9 +69,7 @@ function validateIds<T extends { id: string }>(items: readonly T[]) {
 function verifyTimestamp(value: string | null) {
   if (
     value !== null &&
-    (!/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d+)?(?:Z|[+-]\d\d:\d\d)$/.test(
-      value,
-    ) ||
+    (!/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d+)?(?:Z|[+-]\d\d:\d\d)$/.test(value) ||
       !Number.isFinite(Date.parse(value)))
   ) {
     throw new TypeError("Expected an ISO timestamp with timezone")
@@ -127,9 +125,7 @@ export function RouteEvidence({ access }: { access: EvidenceAccess<RouteProjecti
                     ? "Carrier-reported, not independently verified"
                     : "Source-verified transport milestone"}
               </span>
-              {stop.asOf && (
-                <time dateTime={stop.asOf}> — As of {stop.asOf}</time>
-              )}
+              {stop.asOf && <time dateTime={stop.asOf}> — As of {stop.asOf}</time>}
             </li>
           ))}
         </ol>
@@ -140,19 +136,13 @@ export function RouteEvidence({ access }: { access: EvidenceAccess<RouteProjecti
   )
 }
 
-export function DocumentEvidence({
-  access,
-}: {
-  access: EvidenceAccess<DocumentProjection>
-}) {
+export function DocumentEvidence({ access }: { access: EvidenceAccess<DocumentProjection> }) {
   if (access.state !== "available") {
     return (
       <EvidenceUnavailable
         state={access.state}
         title={
-          access.state === "restricted"
-            ? "Documents access restricted"
-            : "Documents unavailable"
+          access.state === "restricted" ? "Documents access restricted" : "Documents unavailable"
         }
         explanation={access.explanation}
       />
