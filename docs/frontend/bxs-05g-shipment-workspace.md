@@ -67,3 +67,20 @@ immutable package release is published, verified and pinned independently.
 logistics components and exact published dependencies. Chromium tests keyboard
 tab movement, responsive bounds, reduced motion, axe and capability denial.
 No synthetic fixture is added to the production Next route tree.
+
+## BXS-05 logistics browser visual acceptance receipts (17 October 2026)
+
+The synthetic logistics workspace desktop and mobile screenshots were generated
+by the ordinary Playwright browser job and reviewed as *display-only* fixtures.
+A one-time branch-restricted workflow downloaded artifact
+`thamani-logistics-browser` from run `39050814176`, verified the exact
+SHA256 values below and committed those golden references. That temporary
+write-enabled workflow removed itself in the same commit.
+
+- Desktop: `feb93480c543dd8cc50679ae096f870c62fc574b695cfde9a06e1e92ea4534b7`
+- Mobile: `5381e8b0ccc20a60562d83cd865a98e08ff856d82db315512f08aca32e5959a3`
+
+The baselines prove neither a production brand nor real location, customer
+permission, shipment operations or TMS provider readiness. Keep all existing
+browser, screenshot pixel-tolerance, keyboard, axe, Foundation and Security
+gates mandatory before adopting this source into main.
