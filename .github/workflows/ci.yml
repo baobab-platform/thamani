@@ -8,7 +8,12 @@ concurrency: { group: "ci-${{ github.workflow }}-${{ github.ref }}", cancel-in-p
 jobs:
   verify:
     runs-on: ubuntu-26.04
-    container: { image: "ghcr.io/baobab-platform/baobab-dev:1.4.4-frontend", options: "--user 0" }
+    container:
+      {
+        image: "ghcr.io/baobab-platform/baobab-dev:1.4.4-frontend@sha256:1b3165067912eacbca96b576efb67e0428850b1ff1a953aa9013127a01635371",
+        credentials: { username: "${{ github.actor }}", password: "${{ secrets.GITHUB_TOKEN }}" },
+        options: "--user 0",
+      }
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Audit legacy Medusa Store consumers against ADR-THA-0018 (static only)
@@ -50,7 +55,11 @@ jobs:
     runs-on: ubuntu-26.04
     timeout-minutes: 20
     container:
-      { image: "ghcr.io/baobab-platform/baobab-dev:1.4.4-frontend-e2e", options: "--user 0" }
+      {
+        image: "ghcr.io/baobab-platform/baobab-dev:1.4.4-frontend-e2e@sha256:eb9c401cea16c4f333c28b250dd455e505752dfc6d11e9779a182a02bc207213",
+        credentials: { username: "${{ github.actor }}", password: "${{ secrets.GITHUB_TOKEN }}" },
+        options: "--user 0",
+      }
     env:
       PLAYWRIGHT_BROWSERS_PATH: /root/.cache/ms-playwright
     steps:
