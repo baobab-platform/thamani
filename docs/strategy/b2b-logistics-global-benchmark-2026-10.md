@@ -12,13 +12,13 @@ ADR-THA-0018 supersedes the retired B2C product-cart-checkout business model. Th
 
 ## 2. Benchmark: learn the capabilities, not another company's authority model
 
-| Reference | Publicly described enterprise capability | Lessons for Thamani |
-| --- | --- | --- |
+| Reference                                     | Publicly described enterprise capability                                                                                                               | Lessons for Thamani                                                                                                                                       |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | DHL Global Forwarding **myDHLi Quote + Book** | Instant air/ocean freight rates, comparisons by price/speed/emissions; save and resume; quote collaboration; additional customs and insurance services | A business RFQ/quote should be revisable, versioned, shareable and convertible into a booking only after organisation authority and quote validity checks |
-| DHL South Africa digital business tools | Customer portals, quote/booking/tracking, customs tools and integrations | Split public lead acquisition from authorised corporate self-service; integrate via governed APIs instead of copying a consumer checkout |
-| UPS Supply Chain Solutions | Freight forwarding, transportation management, warehousing/distribution, e-commerce fulfilment | Offer service outcomes and modes, not a merchandise catalogue; keep delivery-to-consumer as a recipient journey within the contracting customer's account |
-| DSV **myDSV** | Quote, book, track, drafts, centralised documents, claims, reporting and customer-specific access | Make operational self-service and exception management a first-class organisation portal |
-| Kuehne+Nagel **myKN** | Quote, booking, shipment visibility, document access, sailing options, analytics | Support shipment milestones, proactive alerts and reliable quotation-to-booking lineage |
+| DHL South Africa digital business tools       | Customer portals, quote/booking/tracking, customs tools and integrations                                                                               | Split public lead acquisition from authorised corporate self-service; integrate via governed APIs instead of copying a consumer checkout                  |
+| UPS Supply Chain Solutions                    | Freight forwarding, transportation management, warehousing/distribution, e-commerce fulfilment                                                         | Offer service outcomes and modes, not a merchandise catalogue; keep delivery-to-consumer as a recipient journey within the contracting customer's account |
+| DSV **myDSV**                                 | Quote, book, track, drafts, centralised documents, claims, reporting and customer-specific access                                                      | Make operational self-service and exception management a first-class organisation portal                                                                  |
+| Kuehne+Nagel **myKN**                         | Quote, booking, shipment visibility, document access, sailing options, analytics                                                                       | Support shipment milestones, proactive alerts and reliable quotation-to-booking lineage                                                                   |
 
 **Sources (vendor descriptions, not independent performance verification):**
 - DHL: https://www.dhl.com/za-en/home/global-forwarding/mydhli/discover-quote-and-book.html
@@ -43,15 +43,15 @@ The principal commitment journey is **Customer Organisation → authorised human
 
 ## 4. Keep platform authority boundaries intact
 
-| Authority | Responsibility |
-| --- | --- |
-| Thamani Digital Estate | Organisation-facing UX, service catalogue/offer composition, commercial quotation and account relationship, 4PL coordination |
-| Control Plane | Canonical Organisation, Tenant, Market, estate, capability and governed workload/resource context; approved estate profile |
-| IAM | Human/workload authentication, assurance and revocation; never customer role authority by itself |
-| Baobab TMS | LogisticsShipment, consignment, booking transport execution, capacity, carrier/asset assignment, route and physical milestones |
-| Trade Docs + Regulations | Trade-document workflow, compliance evidence, applicable regulations, decisions and sovereign authority interaction |
-| ERP + other governed finance capabilities | Contract financial consequences, invoices, accounting, settlement boundaries |
-| CMS + Pulse | Public/editorial content and governed evidence-backed intelligence |
+| Authority                                 | Responsibility                                                                                                                 |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Thamani Digital Estate                    | Organisation-facing UX, service catalogue/offer composition, commercial quotation and account relationship, 4PL coordination   |
+| Control Plane                             | Canonical Organisation, Tenant, Market, estate, capability and governed workload/resource context; approved estate profile     |
+| IAM                                       | Human/workload authentication, assurance and revocation; never customer role authority by itself                               |
+| Baobab TMS                                | LogisticsShipment, consignment, booking transport execution, capacity, carrier/asset assignment, route and physical milestones |
+| Trade Docs + Regulations                  | Trade-document workflow, compliance evidence, applicable regulations, decisions and sovereign authority interaction            |
+| ERP + other governed finance capabilities | Contract financial consequences, invoices, accounting, settlement boundaries                                                   |
+| CMS + Pulse                               | Public/editorial content and governed evidence-backed intelligence                                                             |
 
 **Important CAA-06b/Decision 9 boundary:** Shared ADR-SHARED-042 requires authenticated, CP-governed provenance on *any* native Trade commitment path. A Medusa Store API/publishable key or background job is not estate provenance. A BFF may use CP estate-client binding; a non-BFF workload must use CP-governed estate-resource assignment and independently validated buyer/seller commitments. Missing provenance is refused, never classified as B2C. Nothing in this benchmark is a CAA-06b implementation, a live CP commerce-profile registration or requalification of historical TA-08 legacy retail checkout. Logistics booking is not automatically a Medusa order.
 
