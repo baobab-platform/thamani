@@ -1,0 +1,8 @@
+{
+  "name": "@baobab-platform/thamani-logistics-prototype",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node ../node_modules/next/dist/bin/next dev"
+  }
+}
