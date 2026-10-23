@@ -18,9 +18,9 @@ The customer is a fictitious Customer Organisation, **Acacia Exports**. Its repr
 
 ## Stack and separation
 
-The prototype is a **separate Next.js 16.3.8 App Router application** in `prototype/app`, using the repository's pinned React 19.3.0, strict TypeScript, Tailwind CSS 4.3.3, Zod 4.4.3, Base UI 1.9.0, `experience-tokens@0.3.1` and `experience-ui@0.3.1`. Reusable client components live under `src/components/logistics/prototype`; synthetic scenario helpers live in `src/lib/logistics/prototype.ts`.
+The prototype is a **separate Next.js 16.4.1 App Router application** in `prototype/app`, using the repository's pinned React 19.3.0, strict TypeScript, Tailwind CSS 4.3.3, Zod 4.4.3, Base UI 1.9.0, `experience-tokens@0.3.1` and `experience-ui@0.3.1`. Reusable client components live under `src/components/logistics/prototype`; synthetic scenario helpers live in `src/lib/logistics/prototype.ts`.
 
-Node 24 and pnpm 11.24.0 remain the repository baseline. PostgreSQL 17 remains the backend baseline when a connected implementation needs a database; this presentation prototype needs none. No dependency pin or lockfile changes are required. The new navy/white/gold palette is a scoped design proposal, not approval of a production logistics theme or the retired retail theme.
+Node 24 and pnpm 11.24.0 remain the repository baseline. PostgreSQL 17 remains the backend baseline when a connected implementation needs a database; this presentation prototype needs none. Merge-gate security remediation pins Next.js and eslint-config-next to 16.4.1 and Vite to 8.2.4; the lockfile is regenerated while preserving the immutable Shared 0.3.1 resolutions. No new audit exceptions are introduced. The new navy/white/gold palette is a scoped design proposal, not approval of a production logistics theme or the retired retail theme.
 
 ```sh
 # After the repository's normal authenticated GitHub Packages installation:
@@ -48,3 +48,7 @@ Before connected staging, replace fixtures through an authorised estate BFF/proj
 - Do not treat a passing unit suite or static build as connected-provider qualification, approved brand visuals or production launch acceptance.
 
 The initial local registry installation returned HTTP 401 for private Shared packages. Local checks used source-built packages from the exact upstream `0.3.1` tag (`83e5a4a5db7111fa4fbd3603559b1ef6136eaae3`), without changing dependency pins or committing package substitutes. CI's normal authenticated registry installation remains the independent check of the published archives.
+
+## Security gate remediation
+
+The mandatory scans reported Next.js image/cache RCE and Server Action DoS advisories affecting the previous 16.3.8 pin, and a development-server advisory affecting Vite 8.2.2. Next.js 16.4.1 and Vite 8.2.4 are the patched releases identified by the upstream advisories. Sources: https://github.com/advisories/GHSA-2464-fhr4-w9xw, https://github.com/advisories/GHSA-673q-mjm6-r5xr, https://github.com/advisories/GHSA-p3m5-59mp-jv5r and https://github.com/advisories/GHSA-587h-7wmj-h5pm.

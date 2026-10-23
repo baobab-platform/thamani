@@ -4,6 +4,8 @@ import { resolve } from "node:path"
 import type { AxeResults } from "axe-core"
 
 const require = createRequire(resolve(process.cwd(), "package.json"))
+// The complete multi-screen journey includes several independent axe scans.
+test.setTimeout(90_000)
 async function navigate(page: Page, name: string) {
   const menu = page.getByRole("button", { name: "Open navigation" })
   if (await menu.isVisible()) await menu.click()
@@ -33,7 +35,7 @@ test("customer quote → booking request → track, on desktop and mobile", asyn
 }, testInfo) => {
   await page.goto("/prototype.html")
   await checkAccessibility(page)
-  await page.screenshot({ path: testInfo.outputPath("prototype-overview.png"), fullPage: true })
+  await page.screenshot({ path: testInfo.outputPath("prototype-overview.png"), timeout: 10_000 })
   await navigate(page, "Get a quote")
   await page.getByRole("combobox", { name: "Destination", exact: true }).selectOption("Kampala, UG")
   await page.getByRole("button", { name: "Compare demo services" }).click()
@@ -64,7 +66,7 @@ test("customer quote → booking request → track, on desktop and mobile", asyn
   await expect(page.getByRole("tabpanel")).toContainText("1,200 kg")
   await page.screenshot({
     path: testInfo.outputPath("prototype-booking-details.png"),
-    fullPage: true,
+    timeout: 10_000,
   })
   await navigate(page, "Track a shipment")
   await page.getByLabel("Shipment reference").fill("UNKNOWN")
