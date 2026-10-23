@@ -1,7 +1,8 @@
 import { expect, test } from "@playwright/test"
 import { createRequire } from "node:module"
+import { resolve } from "node:path"
 
-const require = createRequire(import.meta.url)
+const require = createRequire(resolve(process.cwd(), "package.json"))
 
 test("home is keyboard-readable and has no serious accessibility violations", async ({ page }) => {
   await page.goto("/")
