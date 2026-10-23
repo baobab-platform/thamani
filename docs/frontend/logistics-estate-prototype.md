@@ -18,7 +18,7 @@ The customer is a fictitious Customer Organisation, **Acacia Exports**. Its repr
 
 ## Stack and separation
 
-The prototype is a **separate Next.js 16.4.1 App Router application** in `prototype/app`, using the repository's pinned React 19.3.0, strict TypeScript, Tailwind CSS 4.3.3, Zod 4.4.3, Base UI 1.9.0, `experience-tokens@0.3.1` and `experience-ui@0.3.1`. Reusable client components live under `src/components/logistics/prototype`; synthetic scenario helpers live in `src/lib/logistics/prototype.ts`.
+The prototype runs in the main **Next.js 16.4.1 App Router application**, with an independent static preview in `prototype/app`, using the repository's pinned React 19.3.0, strict TypeScript, Tailwind CSS 4.3.3, Zod 4.4.3, Base UI 1.9.0, `experience-tokens@0.3.1` and `experience-ui@0.3.1`. Reusable client components live under `src/components/logistics/prototype`; synthetic scenario helpers live in `src/lib/logistics/prototype.ts`.
 
 Node 24 and pnpm 11.24.0 remain the repository baseline. PostgreSQL 17 remains the backend baseline when a connected implementation needs a database; this presentation prototype needs none. Merge-gate security remediation pins Next.js and eslint-config-next to 16.4.1 and Vite to 8.2.4; the lockfile is regenerated while preserving the immutable Shared 0.3.1 resolutions. No new audit exceptions are introduced. The new navy/white/gold palette is a scoped design proposal, not approval of a production logistics theme or the retired retail theme.
 
@@ -28,7 +28,7 @@ pnpm prototype:dev
 pnpm prototype:build
 ```
 
-The build statically exports to `prototype/out/`. Webpack is selected explicitly for this isolated export; the production app's build configuration and `src/app` route tree are unchanged. Vite, already used by the repository, is only the browser component acceptance harness (`tests/browser/prototype.html`); private hosting uses the Next.js export.
+The build statically exports to `prototype/out/`. Webpack is selected explicitly for this isolated export; the main app also exposes the demo through the route tree documented below. Vite, already used by the repository, is only the browser component acceptance harness (`tests/browser/prototype.html`); private hosting uses the Next.js export.
 
 ## Private preview and governance
 
@@ -52,3 +52,24 @@ The initial local registry installation returned HTTP 401 for private Shared pac
 ## Security gate remediation
 
 The mandatory scans reported Next.js image/cache RCE and Server Action DoS advisories affecting the previous 16.3.8 pin, and a development-server advisory affecting Vite 8.2.2. Next.js 16.4.1 and Vite 8.2.4 are the patched releases identified by the upstream advisories. Sources: https://github.com/advisories/GHSA-2464-fhr4-w9xw, https://github.com/advisories/GHSA-673q-mjm6-r5xr, https://github.com/advisories/GHSA-p3m5-59mp-jv5r and https://github.com/advisories/GHSA-587h-7wmj-h5pm.
+
+## Main application routes
+
+The main landing page now presents the B2B logistics direction under ADR-THA-0018. Its navigation and calls to action link to the same synthetic prototype components through the main Next.js App Router:
+
+| Route                     | Experience                                                   |
+| ------------------------- | ------------------------------------------------------------ |
+| `/workspace`              | Demo organisation overview                                   |
+| `/quotes`                 | Quote inputs, sample offers and simulated approval           |
+| `/bookings`               | Review the current session quote, or recover by creating one |
+| `/tracking`               | Find a fixture or a request created in this session          |
+| `/shipments`              | Search and filter the demo portfolio                         |
+| `/shipments/[shipmentId]` | Direct fixture details or current session request details    |
+| `/documents`              | Sample document checklists                                   |
+| `/support`                | FAQ and simulated support request                            |
+
+A shared workspace layout preserves quotes and requests during client navigation and browser Back/Forward. Refreshing clears session data. Unknown references and refreshed session booking URLs show an unavailable state, never another shipment. Workspace routes carry `noindex, nofollow` metadata and are excluded from the sitemap. These are presentation routes, not authentication or resource authorisation boundaries; IAM/CP and engine integration remain future work.
+
+Legacy `/shop` and `/products/[handle]` links redirect to `/quotes`, `/search` to `/tracking`, and `/cart` and `/checkout` to `/bookings`. Historical Medusa adapters remain preserved for the explicit legacy static audit and are no longer invoked by these entry points. The isolated static prototype remains usable independently; no public hosting deployment is implied by this route integration.
+
+`pnpm test:e2e` now covers the real Next.js landing links, quote-to-booking routes, browser history, direct fixture links, session reset recovery and retail redirects on desktop and mobile. CI runs these alongside the isolated component browser suite.

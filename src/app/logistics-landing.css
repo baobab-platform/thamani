@@ -1,0 +1,160 @@
+.logistics-landing {
+  --color-ink: #172b3a;
+  --color-muted: #526370;
+  --color-canvas: #f8fafb;
+  --color-accent: #173f51;
+  --color-accent-strong: #102c39;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  min-height: 100vh;
+}
+.logistics-landing .site-header {
+  background: white;
+  font-size: 0.9rem;
+}
+.logistics-landing .brand small {
+  display: block;
+  font-size: 0.55rem;
+  letter-spacing: 0.16em;
+  margin-top: 0.25rem;
+}
+.logistics-hero {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: center;
+  padding-block: clamp(3rem, 8vw, 7rem);
+}
+.logistics-hero h1 {
+  font-size: clamp(2.8rem, 5.5vw, 5rem);
+  line-height: 1.05;
+  letter-spacing: -0.05em;
+  margin: 1rem 0 1.5rem;
+}
+.logistics-hero p {
+  max-width: 53ch;
+  color: var(--color-muted);
+}
+.landing-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  margin-top: 1.75rem;
+  font-weight: 700;
+}
+.logistics-landing .button {
+  border-radius: 0.4rem;
+}
+.landing-secondary {
+  padding: 0.8rem 0;
+}
+.logistics-hero .landing-disclosure {
+  font-size: 0.75rem;
+  margin-top: 2rem;
+}
+.landing-journey {
+  background: #173f51;
+  color: white;
+  padding: clamp(1.5rem, 3vw, 3rem);
+  border-radius: 1rem;
+  box-shadow: 0 20px 60px #173f511c;
+}
+.landing-journey p,
+.landing-journey .eyebrow {
+  color: #d2e2e8;
+}
+.landing-journey h2 {
+  font-size: 1.8rem;
+  margin: 1rem 0 0.25rem;
+}
+.landing-journey ol {
+  list-style: none;
+  padding: 0;
+  margin-block: 2rem;
+  counter-reset: journey;
+}
+.landing-journey li {
+  position: relative;
+  padding: 0 0 1.5rem 2.8rem;
+  counter-increment: journey;
+}
+.landing-journey li::before {
+  content: counter(journey);
+  position: absolute;
+  left: 0;
+  border: 1px solid #8fb0be;
+  border-radius: 50%;
+  width: 1.7rem;
+  height: 1.7rem;
+  text-align: center;
+  color: #f4cc70;
+}
+.landing-journey li span {
+  display: block;
+  color: #d2e2e8;
+  font-size: 0.8rem;
+}
+.landing-journey a {
+  color: #f4cc70;
+  font-weight: 700;
+}
+.landing-section {
+  padding-block: 3rem;
+}
+.landing-section h2 {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+.landing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.landing-grid article {
+  padding: 2rem;
+  border: 1px solid #dce4e8;
+  background: white;
+  border-radius: 0.75rem;
+  display: flex;
+  flex-direction: column;
+}
+.landing-number {
+  color: #8c691f;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.landing-grid p,
+.landing-services p {
+  color: var(--color-muted);
+}
+.landing-grid a {
+  font-weight: 700;
+  margin-top: auto;
+  padding-top: 1rem;
+}
+.landing-services {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  border-top: 1px solid #dce4e8;
+}
+.logistics-landing .site-footer {
+  font-size: 0.85rem;
+}
+@media (max-width: 760px) {
+  .logistics-hero,
+  .landing-grid,
+  .landing-services {
+    grid-template-columns: 1fr;
+  }
+  .logistics-landing .site-header,
+  .logistics-landing .site-footer {
+    flex-wrap: wrap;
+  }
+  .logistics-landing .site-header nav {
+    gap: 1rem;
+  }
+}
