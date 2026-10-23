@@ -8,7 +8,7 @@ permissions: { contents: read, packages: read }
 jobs:
   codeql:
     permissions: { contents: read, security-events: write, actions: read }
-    uses: baobab-platform/shared/.github/workflows/security-codeql.yml@756892fbdbcf0eb89bf62f720c372bad53748dea # accepted private-registry Foundation
+    uses: baobab-platform/shared/.github/workflows/security-codeql.yml@1517429bcae601a1b0288ca0279e524ce48a3d77 # accepted private-registry Foundation
     with: { languages: '["javascript-typescript"]' }
   dependency-audit:
     runs-on: ubuntu-26.04
