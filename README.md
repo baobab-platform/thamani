@@ -6,6 +6,10 @@ Thamani Global is a **B2B integrated logistics enterprise**: its primary commerc
 
 For the customer-facing logistics service model and comparative lessons from DHL, UPS, DSV and Kuehne+Nagel, see [B2B logistics global benchmark](docs/strategy/b2b-logistics-global-benchmark-2026-10.md). This is implementation guidance, not a new commercial-model decision.
 
+## Interactive logistics prototype
+
+The isolated Next.js logistics workspace covers quotes, demo booking requests, shipment tracking/details, documents and support. Run `pnpm prototype:dev`; see [prototype scope, private hosting and validation](docs/frontend/logistics-estate-prototype.md). This synthetic prototype is separate from production routes and connected-service acceptance.
+
 ## Ecosystem
 
 Thamani sits in the `baobab-platform` ecosystem. It shares contracts and APIs with these repositories, never their source trees or databases.

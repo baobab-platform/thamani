@@ -36,7 +36,7 @@ Thamani SHOULD test these capabilities against African corridors and constraints
 
 **Logistics partner portal:** organisation/counterparty qualification, capability/market evidence, offered capacity, tender/assignment response, performance and document exchange where governed. Partners are not automatically platform Tenants.
 
-**Operations and 4PL control tower:** governed service composition and provider orchestration; claims and escalations; a consolidated *view* of operational evidence from the owning engines, never a rival operational system of record.
+**Operations and 4PL control tower:** governed service composition and provider orchestration; claims and escalations; a consolidated _view_ of operational evidence from the owning engines, never a rival operational system of record.
 
 The principal commitment journey is **Customer Organisation → authorised human/workload → RFQ → quoted service → approval → B2B booking/service order → transport execution → delivery/exception → financial settlement**. A consignee's tracking rights are scoped and distinct from purchasing powers.
 
@@ -50,11 +50,11 @@ The principal commitment journey is **Customer Organisation → authorised human
 - **ERP and governed finance engines:** Invoices, accounting, settlement and financial responsibility.
 - **CMS and Pulse:** Editorial content and governed evidence-backed intelligence.
 
-**Important CAA-06b/Decision 9 boundary:** Shared ADR-SHARED-042 requires authenticated, CP-governed provenance on *any* native Trade commitment path. A Medusa Store API/publishable key or background job is not estate provenance. A BFF may use CP estate-client binding; a non-BFF workload must use CP-governed estate-resource assignment and independently validated buyer/seller commitments. Missing provenance is refused, never classified as B2C. Nothing in this benchmark is a CAA-06b implementation, a live CP commerce-profile registration or requalification of historical TA-08 legacy retail checkout. Logistics booking is not automatically a Medusa order.
+**Important CAA-06b/Decision 9 boundary:** Shared ADR-SHARED-042 requires authenticated, CP-governed provenance on _any_ native Trade commitment path. A Medusa Store API/publishable key or background job is not estate provenance. A BFF may use CP estate-client binding; a non-BFF workload must use CP-governed estate-resource assignment and independently validated buyer/seller commitments. Missing provenance is refused, never classified as B2C. Nothing in this benchmark is a CAA-06b implementation, a live CP commerce-profile registration or requalification of historical TA-08 legacy retail checkout. Logistics booking is not automatically a Medusa order.
 
 ## 5. Acceptance and sequencing
 
-1. **P0 architecture correction:** reconcile Shared Decision 8/9, CP profile texts and founding-group onboarding fixtures to Thamani B2B; retain general platform B2C capability for *other* governed estates.
+1. **P0 architecture correction:** reconcile Shared Decision 8/9, CP profile texts and founding-group onboarding fixtures to Thamani B2B; retain general platform B2C capability for _other_ governed estates.
 2. **P0 public estate:** deliver truthful logistics service and corridor discovery, contact/RFQ lead capture through a secure reviewed route, privacy, accessibility, SEO, genuine content and navigation. Public launch does not imply live booking permissions.
 3. **P1 authenticated business context:** IAM → CP → approved Customer Organisation membership and Market/service scopes; positive and negative identity tests.
 4. **P1 quote/book/track:** quote validity and approvals; versioned service commitment; governed TMS booking and read-only milestones; appropriate document/financial ownership. Define a non-BFF estate assignment where workflows require it.
