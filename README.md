@@ -4,6 +4,8 @@ Thamani Global is a **B2B integrated logistics enterprise**: its primary commerc
 
 > **Governing decision:** [ADR-THA-0018](<docs/adr/ADR-THA-0018 — B2B Commercial Model, Legacy Supersession and Platform Engine Responsibility Reallocation.md>) supersedes the original B2C ecommerce model (ADR-0001) and the supplier-portal model (ADR-0002). The product catalogue, cart, checkout and search routes in `src/` are **legacy code** from that model. They are not the target customer experience and a passing legacy check does not authorise any logistics journey. See `docs/compatibility/medusa-2.21.2-consumer-audit.md`.
 
+For the customer-facing logistics service model and comparative lessons from DHL, UPS, DSV and Kuehne+Nagel, see [B2B logistics global benchmark](docs/strategy/b2b-logistics-global-benchmark-2026-10.md). This is implementation guidance, not a new commercial-model decision.
+
 ## Ecosystem
 
 Thamani sits in the `baobab-platform` ecosystem. It shares contracts and APIs with these repositories, never their source trees or databases.
