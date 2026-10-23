@@ -19,6 +19,7 @@ ADR-THA-0018 supersedes the retired B2C product-cart-checkout business model. Th
 - **Kuehne+Nagel (myKN):** Freight quotes, bookings, shipment visibility, documents, schedules and analytics. For Thamani: quote-to-book lineage, milestone tracking, proactive alerts and trustworthy reporting.
 
 **Sources (vendor descriptions, not independent performance verification):**
+
 - DHL: https://www.dhl.com/za-en/home/global-forwarding/mydhli/discover-quote-and-book.html
 - DHL South Africa: https://www.dhl.com/za-en/home/dhl-for-your-business/why-partner-with-us/integrations-and-tools.html
 - UPS: https://www.ups.com/us/en/ups-supplychain
