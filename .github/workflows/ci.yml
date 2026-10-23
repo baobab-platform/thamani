@@ -37,6 +37,8 @@ jobs:
           NEXT_PUBLIC_SITE_URL: http://localhost:3000
           NEXT_PUBLIC_MARKET: za
           NEXT_PUBLIC_DEFAULT_REGION_ID: reg_ci_build_only
+      - name: Build isolated synthetic logistics prototype
+        run: pnpm prototype:build
       - run: test -f contracts.lock.yaml && test -f runtime/requirements.yaml && test -f .baobab/environment.yaml
   image:
     runs-on: ubuntu-26.04
