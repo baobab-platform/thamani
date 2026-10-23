@@ -8,7 +8,7 @@ For the customer-facing logistics service model and comparative lessons from DHL
 
 ## Interactive logistics prototype
 
-The isolated Next.js logistics workspace covers quotes, demo booking requests, shipment tracking/details, documents and support. Run `pnpm prototype:dev`; see [prototype scope, private hosting and validation](docs/frontend/logistics-estate-prototype.md). This synthetic prototype is separate from production routes and connected-service acceptance.
+The main Next.js landing page now opens the synthetic logistics workspace at `/workspace`, with linked routes for `/quotes`, `/bookings`, `/tracking`, `/shipments`, `/shipments/[shipmentId]`, `/documents` and `/support`. Run `pnpm dev`. The independent static preview remains available with `pnpm prototype:dev`; see [prototype scope, routing, private hosting and validation](docs/frontend/logistics-estate-prototype.md). These routes use demo data only and do not constitute connected-service acceptance.
 
 ## Ecosystem
 

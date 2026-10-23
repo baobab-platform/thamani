@@ -88,7 +88,7 @@ test("shipment filtering, document checklist and support remain useful", async (
   await expect(page.getByRole("rowgroup").nth(1).getByRole("row")).toHaveCount(1)
   await page.getByRole("button", { name: "TH-260183", exact: true }).click()
   await page.getByRole("tab", { name: "Documents", exact: true }).click()
-  await expect(page.getByRole("tabpanel")).toContainText("Missing")
+  await expect(page.getByRole("tabpanel", { name: "Documents" })).toContainText("Missing")
   await checkAccessibility(page)
   await page.getByRole("button", { name: "Contact your coordinator" }).click()
   await page.getByLabel("Test message").fill("Fictitious packing list question.")

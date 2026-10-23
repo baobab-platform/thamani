@@ -73,6 +73,14 @@ jobs:
         run: bash scripts/configure-private-npm.sh
       - run: pnpm install --frozen-lockfile
       - run: pnpm test:logistics:browser
+      - name: Verify landing and Next.js logistics routes
+        run: pnpm test:e2e
+        env:
+          MEDUSA_BACKEND_URL: http://localhost:9000
+          NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY: pk_ci_build_only
+          NEXT_PUBLIC_SITE_URL: http://localhost:3000
+          NEXT_PUBLIC_MARKET: za
+          NEXT_PUBLIC_DEFAULT_REGION_ID: reg_ci_build_only
       - name: Preserve browser evidence
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v4.7.5

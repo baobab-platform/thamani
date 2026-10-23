@@ -15,15 +15,11 @@ import {
 import { Icon } from "./icon"
 import { BookingReview, QuoteBuilder } from "./quote-builder"
 
-type Page =
-  | "Overview"
-  | "Shipments"
-  | "Get a quote"
-  | "Track a shipment"
-  | "Documents"
-  | "Help & support"
-  | "Booking"
-  | "Shipment details"
+import {
+  workspacePath,
+  workspaceRoute,
+  type WorkspacePage as Page,
+} from "@/lib/logistics/prototype-routes"
 const navigation = [
   { page: "Overview", icon: "grid" },
   { page: "Shipments", icon: "box" },
@@ -496,8 +492,16 @@ function Support({ shipmentId }: { shipmentId: string }) {
   )
 }
 
-export function LogisticsPrototype() {
-  const [page, setPage] = useState<Page>("Overview")
+export function LogisticsPrototype({
+  pathname,
+  onNavigate,
+}: {
+  pathname?: string
+  onNavigate?: (href: string) => void
+} = {}) {
+  const [localPage, setPage] = useState<Page>("Overview")
+  const route = pathname ? workspaceRoute(pathname) : undefined
+  const page = route?.page ?? localPage
   const [shipments, setShipments] = useState(initialShipments)
   const [selected, setSelected] = useState<DemoShipment>(initialShipments[0])
   const [quote, setQuote] = useState<DemoQuote | null>(null)
@@ -523,15 +527,16 @@ export function LogisticsPrototype() {
   const bookingLock = useRef(false)
   useEffect(() => {
     heading.current?.focus()
-  }, [page])
-  function navigate(next: Page) {
-    setPage(next)
+  }, [page, route?.shipmentId])
+  function navigate(next: Page, shipmentId?: string) {
+    if (onNavigate) onNavigate(workspacePath(next, shipmentId))
+    else setPage(next)
     setMobileMenu(false)
     setNotice("")
   }
   function openShipment(shipment: DemoShipment) {
     setSelected(shipment)
-    navigate("Shipment details")
+    navigate("Shipment details", shipment.id)
   }
   function newQuote(request: DemoRequest) {
     setQuote(createDemoQuote(request, Date.now(), quoteSequence.current++))
@@ -595,6 +600,9 @@ export function LogisticsPrototype() {
         .toLowerCase()
         .includes(search.toLowerCase()),
   )
+  const detailShipment = route?.shipmentId
+    ? shipments.find((item) => item.id === route.shipmentId)
+    : selected
   const active = shipments.filter((item) => item.status !== "Delivered").length
   return (
     <div className="tg-app" key={resetKey}>
@@ -603,11 +611,13 @@ export function LogisticsPrototype() {
       </a>
       <aside className={`tg-sidebar ${mobileMenu ? "is-open" : ""}`} aria-label="Main navigation">
         <a
-          href="#overview"
+          href={pathname ? "/" : "#overview"}
           className="tg-logo"
           onClick={(e) => {
-            e.preventDefault()
-            navigate("Overview")
+            if (!pathname) {
+              e.preventDefault()
+              navigate("Overview")
+            }
           }}
         >
           <span className="tg-mark">
@@ -895,11 +905,37 @@ export function LogisticsPrototype() {
               onBack={() => navigate("Get a quote")}
             />
           )}
-          {page === "Shipment details" && (
+          {page === "Booking" && !quote && (
+            <section className="tg-card">
+              <h2>Start with a quote</h2>
+              <p>
+                Your quote belongs to this demo session. Create a quote before reviewing a booking.
+              </p>
+              <button className="tg-primary" onClick={() => navigate("Get a quote")}>
+                Get a quote
+              </button>
+            </section>
+          )}
+          {page === "Shipment details" && !detailShipment && (
+            <section className="tg-card" role="status">
+              <h2>Shipment unavailable in this demo session</h2>
+              <p>
+                Check the reference or choose a sample shipment. Refreshing clears simulated booking
+                requests.
+              </p>
+              <button className="tg-primary" onClick={() => navigate("Shipments")}>
+                View shipments
+              </button>
+            </section>
+          )}
+          {page === "Shipment details" && detailShipment && (
             <ShipmentDetail
-              key={selected.id}
-              shipment={selected}
-              onSupport={() => navigate("Help & support")}
+              key={detailShipment.id}
+              shipment={detailShipment}
+              onSupport={() => {
+                setSelected(detailShipment)
+                navigate("Help & support")
+              }}
             />
           )}
           {page === "Track a shipment" && (

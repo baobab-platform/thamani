@@ -5,6 +5,15 @@ import { LogisticsPrototype } from "./logistics-prototype"
 afterEach(cleanup)
 
 describe("Customer logistics prototype", () => {
+  it("resolves shipment URLs and recovers from missing session state", () => {
+    const { rerender } = render(<LogisticsPrototype pathname="/shipments/TH-260184" />)
+    expect(screen.getByRole("heading", { name: "TH-260184" })).toBeInTheDocument()
+    rerender(<LogisticsPrototype pathname="/shipments/UNKNOWN" />)
+    expect(screen.getByText("Shipment unavailable in this demo session")).toBeInTheDocument()
+    expect(screen.queryByRole("heading", { name: "TH-260184" })).not.toBeInTheDocument()
+    rerender(<LogisticsPrototype pathname="/bookings" />)
+    expect(screen.getByRole("heading", { name: "Start with a quote" })).toBeInTheDocument()
+  })
   it("carries a quote into a demo request, exposes it in tracking, and resets the session", () => {
     render(<LogisticsPrototype />)
     fireEvent.click(
