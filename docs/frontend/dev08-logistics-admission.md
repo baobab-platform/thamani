@@ -81,9 +81,20 @@ to be UX evidence only. No real transport receipt or teardown claim is created.
 The local GitHub Packages install returned 401. Local source checks built the
 three Shared Experience packages at exact `0.3.1` source commit
 `83e5a4a5db7111fa4fbd3603559b1ef6136eaae3` in a temporary workspace, using
-Thamani's direct public dependency versions. The repository manifest and lock
-remain unchanged. Those checks do not prove the published archives install;
+Thamani's direct public dependency versions. The immutable Shared registry pins
+and archive hashes remain unchanged. Those checks do not prove the published archives install;
 normal authenticated owner CI must independently prove that before merge.
+
+The first CI run identified high-severity Zod and Undici advisories in the
+existing dependency lock. This increment pins Zod 4.6.6 and the affected Undici
+8.x leaf to 8.12.2, including compatible transitive Zod 4.x consumers. The two
+leaf resolutions use their registry integrity hashes; the three private Shared
+importers and original archive/snapshot entries are verified unchanged. A local
+lock-only install also requires unavailable registry authentication, so the owner
+frozen-lock installation is required to independently validate the lock. No new
+audit suppression is introduced. Advisory sources:
+https://github.com/advisories/GHSA-mrhx-c7xc-m3w5 and
+https://github.com/advisories/GHSA-xjj6-f33q-929c.
 
 ## Integration and maintenance
 

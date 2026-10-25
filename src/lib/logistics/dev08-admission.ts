@@ -126,9 +126,12 @@ export async function admitShipmentEvidence(
 ): Promise<AdmissionResult> {
   try {
     const start = ports.clock()
+    let previous = start
     const clock = () => {
       const value = ports.clock()
-      return Number.isFinite(value) && value >= start ? value : NaN
+      if (!Number.isFinite(value) || value < previous) return NaN
+      previous = value
+      return value
     }
     if (
       !Number.isFinite(start) ||

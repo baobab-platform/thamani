@@ -232,6 +232,20 @@ describe("DEV-08 source boundary — synthetic receipts, no provider qualificati
     ).toEqual(restricted)
     expect(read).not.toHaveBeenCalled()
   })
+  it("rejects rollback after an intermediate reading, even when still after the start", async () => {
+    const offsets = [0, 1000, 2000, 50_000, 10_000]
+    let index = 0
+    expect(
+      await admitShipmentEvidence(
+        {
+          ...fixture(),
+          clock: () => time + offsets[index++],
+          shipment: async () => ({ ...shipment, asOf: "2026-10-25T10:00:00Z" }),
+        },
+        { ...input, maximumEvidenceAgeMs: 20_000 },
+      ),
+    ).toEqual(restricted)
+  })
   it("admits only a separately permitted, exactly matched sourced event occurrence", async () => {
     const source = {
       reference: "synthetic-event",
