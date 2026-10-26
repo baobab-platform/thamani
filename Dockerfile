@@ -1,5 +1,5 @@
 # Platform baseline: baobab-dev Node 24 (not the pre-migration Node 26 image).
-FROM node:24.21.0-trixie-slim@sha256:8ec5d7557396cfe32d21c3f9c13072355ceab22b584578ca4bb28af31120cffe AS dependencies
+FROM node:26.12.1-trixie-slim@sha256:36793bcbb160a6a16cede1e62b93f84e26b78a972a8a4c0b879c1c12f22761ec AS dependencies
 WORKDIR /app
 RUN npm install --global pnpm@11.24.0
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
