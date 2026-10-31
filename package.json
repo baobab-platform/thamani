@@ -18,7 +18,8 @@
     "test:e2e": "playwright test",
     "test:logistics:browser": "playwright test --config playwright.logistics.config.ts",
     "prototype:dev": "next dev prototype",
-    "prototype:build": "next build prototype --webpack"
+    "prototype:build": "next build prototype --webpack",
+    "test:auth-store": "vitest run --config vitest.auth-store.config.ts"
   },
   "dependencies": {
     "@baobab-platform/experience-geo-core": "0.3.1",
