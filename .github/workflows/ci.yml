@@ -24,6 +24,18 @@ jobs:
           PR_HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
         run: bash scripts/configure-private-npm.sh
       - run: pnpm install --frozen-lockfile
+      - name: Build exact-commit real TLS Redis development service (not protected provider)
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends libssl-dev
+          bash scripts/build-test-redis.sh "$RUNNER_TEMP/thamani-test-redis" > "$RUNNER_TEMP/thamani-redis-build.log" 2>&1 || {
+            tail -50 "$RUNNER_TEMP/thamani-redis-build.log"
+            exit 1
+          }
+      - name: Test genuine cross-worker TLS Redis custody and denial negatives
+        env:
+          THAMANI_TEST_REDIS_BINARY: ${{ runner.temp }}/thamani-test-redis/src/redis-server
+        run: pnpm test:auth-store
       - name: Verify Foundation v2 configuration coherence
         run: node --test scripts/verify-foundation-v2.node.mjs
       - run: pnpm format:check

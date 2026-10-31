@@ -10,6 +10,9 @@ export function SiteHeader() {
         <Link href="/quotes">Get a quote</Link>
         <Link href="/tracking">Track shipment</Link>
         <Link href="/workspace">Workspace →</Link>
+        {process.env.THAMANI_OIDC_ENABLED === "true" ? (
+          <Link href="/sign-in">Business sign-in</Link>
+        ) : null}
       </nav>
     </header>
   )
