@@ -36,6 +36,19 @@ A customer organisation is not automatically a tenant, and legal entity is not s
 
 The deployed slice is still the legacy storefront (home, catalogue, product detail, server-side add-to-cart, cart, search, health, SEO controls and a deliberate checkout gate). Checkout is not fabricated. It is retained only until the B2B logistics experience replaces it, and is decommissioned or covered by a time-bounded compatibility smoke test per the audit above.
 
+## Governed IAM / CP integration (draft)
+
+An opt-in, private and **not yet connected-qualified** B2B sign-in
+implementation now exists at `/sign-in` and
+`/api/auth/{login,callback,session,logout,context}`. It uses OIDC/PKCE,
+current issuer and Control Plane Principal readback, confidential TLS Redis
+session custody, CSRF-protected local logout, and a read-only CP-governed
+Organisation/Tenant/Market navigation projection. It is **disabled by default**;
+its output expressly does not grant a logistics booking, transport, finance or
+Trade Docs command. The synthetic workspace remains unaffected. See
+[Thamani IAM-N07 owner runbook](docs/operations/iam-n07-b2b-identity.md) and
+[companion IAM #152](https://github.com/baobab-platform/baobab-iam/pull/152).
+
 ## Development
 
 ```bash
