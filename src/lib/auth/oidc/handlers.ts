@@ -103,16 +103,16 @@ export function authHandlers(deps: AuthDependencies = production) {
         if (old) await ctx.store.revokeSession(old);
         const next = await ctx.store.createSession(session);
         // A 3xx continues the cross-site IAM navigation, so Chromium withholds
-        // the Strict session cookie on /identity/native-qualification. Commit a same-origin document
+        // the Strict session cookie on /sign-in. Commit a same-origin document
         // first; its fixed declarative navigation starts a new same-site request.
         // No script, external resource, OAuth value or caller destination enters
         // this document. The anchor also works if automatic refresh is disabled.
         const response = new NextResponse(
           '<!doctype html><html lang="en"><head><meta charset="utf-8">' +
           '<meta name="referrer" content="no-referrer">' +
-          '<meta http-equiv="refresh" content="0;url=/identity/native-qualification">' +
+          '<meta http-equiv="refresh" content="0;url=/sign-in">' +
           '<title>Completing sign-in</title></head><body>' +
-          '<p>Completing sign-in. <a href="/identity/native-qualification">Continue to your account</a>.</p>' +
+          '<p>Completing sign-in. <a href="/sign-in">Continue to your account</a>.</p>' +
           '</body></html>',
           { status: 200, headers: { ...headers, "Content-Type": "text/html; charset=utf-8",
             "Content-Security-Policy": "default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
