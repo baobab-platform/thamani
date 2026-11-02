@@ -50,3 +50,10 @@ test("quote, tracking and shipment details never claim live execution", async ({
     await noViolations(page)
   }
 })
+
+test("public favicon is an actual icon, not a 404 browser-console regression", async ({ page }) => {
+  const response = await page.request.get("/favicon.ico")
+  expect(response.status()).toBe(200)
+  expect(response.headers()["content-type"]).toMatch(/image\/(?:x-icon|vnd\.microsoft\.icon)/)
+  expect((await response.body()).byteLength).toBeGreaterThan(100)
+})

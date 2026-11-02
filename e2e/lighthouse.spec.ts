@@ -79,8 +79,17 @@ test("public homepage and quote experience meet Lighthouse lab budgets", async (
       }),
     )
     expect(scores.performance).toBeGreaterThanOrEqual(90)
-    for (const category of ["accessibility", "best-practices", "seo"]) {
+    // Public SEO quality is mandatory for indexable pages. The quote
+    // workspace is intentionally noindex and disallowed by robots.txt;
+    // penalizing that denial would demand an unsafe indexing regression.
+    for (const category of ["accessibility", "best-practices"]) {
       expect(scores[category], route + " " + category).toBeGreaterThanOrEqual(95)
+    }
+    if (route === "/") {
+      expect(scores.seo, "public homepage SEO").toBeGreaterThanOrEqual(95)
+    } else {
+      await page.goto(route)
+      await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/)
     }
     expect(report.audits["cumulative-layout-shift"].numericValue).toBeLessThanOrEqual(0.1)
     // LCP is recorded, but one throttled load is NOT field p75 LCP/INP.

@@ -60,9 +60,15 @@ a Nabhold subsidiary permission.
 5. Independently executed WCAG 2.2 automated scans and keyboard skip-link
    focus for public home and quote/tracking/shipment details.
 6. Separate single-worker throttled Lighthouse lab for the public homepage
-   and quote route. Minimum category scores: 90 performance, and 95 each
-   accessibility, best practices and SEO; transferred scripts <=250 KiB;
-   CLS <=0.1. LCP is recorded but is not field p75.
+   and the non-indexed synthetic quote route. Minimum category scores: 90
+   performance and 95 accessibility/best practices on both; SEO >=95 is
+   enforced on the indexable homepage only, while the quote route must
+   explicitly remain noindex. Transferred scripts <=250 KiB; CLS <=0.1.
+   LCP is recorded but is not field p75. A neutral monochrome favicon
+   prevents the observed 404 browser-console regression; no unapproved
+   Thamani palette or logo design is introduced. The existing quote route
+   can still emit a CSP inspector diagnostic; CSP hardening requires a
+   separate design/negative qualification and must not relax current policy.
 7. Image-build and pre-existing Foundation/Security checks unchanged.
 
 ### Non-claims
