@@ -73,7 +73,10 @@ jobs:
           PR_HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
         run: bash scripts/configure-private-npm.sh
       - run: pnpm install --frozen-lockfile
-      - run: pnpm test:logistics:browser
+      - name: Logistics keyboard and browser journeys
+        env:
+          CI: "true"
+        run: pnpm test:logistics:browser
       - name: Build production estate for independent quality gates
         env:
           MEDUSA_BACKEND_URL: http://localhost:9000
@@ -87,6 +90,8 @@ jobs:
       - name: Verify landing and Next.js logistics routes
         run: pnpm test:e2e
         env:
+          CI: "true"
+          DEV11_EVIDENCE_GATE: functional
           MEDUSA_BACKEND_URL: http://localhost:9000
           NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY: pk_ci_build_only
           NEXT_PUBLIC_SITE_URL: http://localhost:3000
@@ -96,13 +101,19 @@ jobs:
         run: pnpm test:e2e:visual
         env:
           CI: "true"
+          DEV11_EVIDENCE_GATE: visual
+          CI: "true"
       - name: WCAG landing-page and logistics-route accessibility
         run: pnpm test:e2e:a11y
         env:
           CI: "true"
+          DEV11_EVIDENCE_GATE: accessibility
+          CI: "true"
       - name: Isolated Lighthouse production-build lab
         run: pnpm test:e2e:lighthouse
         env:
+          CI: "true"
+          DEV11_EVIDENCE_GATE: lighthouse
           CI: "true"
       - name: Preserve browser evidence
         if: always()
@@ -115,3 +126,5 @@ jobs:
             test-results/
             tests/browser/logistics.spec.ts-snapshots/
             !test-results/**/*.tmp
+            reports/dev11-*-playwright.json
+            reports/static-budget.json
