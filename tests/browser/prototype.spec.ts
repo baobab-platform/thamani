@@ -63,7 +63,7 @@ test("customer quote → booking request → track, on desktop and mobile", asyn
   await page.keyboard.press("ArrowRight")
   await expect(page.getByRole("tab", { name: "Cargo & route" })).toBeFocused()
   await page.keyboard.press("Enter")
-  await expect(page.getByRole("tabpanel")).toContainText("1,200 kg")
+  await expect(page.getByRole("tabpanel", { name: "Cargo & route" })).toContainText("1,200 kg")
   await page.screenshot({
     path: testInfo.outputPath("prototype-booking-details.png"),
     timeout: 10_000,
