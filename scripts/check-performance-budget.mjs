@@ -81,7 +81,6 @@ budget(
   limits.largestPublicImage,
 )
 
-
 // Independent DEV-11 custody uses actual production-build byte counts.
 // The four existing budget(...) calls above still reject every regression.
 await mkdir(join(root, "reports"), { recursive: true })
