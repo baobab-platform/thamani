@@ -1,4 +1,4 @@
-import { readdir, stat } from "node:fs/promises"
+import { mkdir, readdir, stat, writeFile } from "node:fs/promises"
 import { join, relative } from "node:path"
 
 const root = process.cwd()
@@ -79,4 +79,27 @@ budget(
   "Largest public image (" + largest(images).path + ")",
   largest(images).bytes,
   limits.largestPublicImage,
+)
+
+
+// Independent DEV-11 custody uses actual production-build byte counts.
+// The four existing budget(...) calls above still reject every regression.
+await mkdir(join(root, "reports"), { recursive: true })
+await writeFile(
+  join(root, "reports", "static-budget.json"),
+  JSON.stringify(
+    {
+      profile: "CI_PRODUCTION_BUILD",
+      limits,
+      measured: {
+        allClientJavaScript: js.reduce((sum, item) => sum + item.bytes, 0),
+        largestClientChunk: largest(js).bytes,
+        allCss: css.reduce((sum, item) => sum + item.bytes, 0),
+        largestPublicImage: largest(images).bytes,
+      },
+      oversized: [],
+    },
+    null,
+    2,
+  ) + "\n",
 )
