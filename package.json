@@ -18,19 +18,27 @@
     "test:e2e": "playwright test",
     "test:logistics:browser": "playwright test --config playwright.logistics.config.ts",
     "prototype:dev": "next dev prototype",
-    "prototype:build": "next build prototype --webpack"
+    "prototype:build": "next build prototype --webpack",
+    "perf:budget": "node scripts/check-performance-budget.mjs",
+    "test:e2e:visual": "playwright test e2e/landing-page.visual.spec.ts --project=chromium --workers=1",
+    "test:e2e:a11y": "playwright test e2e/landing-page.accessibility.spec.ts --project=chromium --workers=1",
+    "test:e2e:lighthouse": "THAMANI_LIGHTHOUSE_ONLY=true playwright test e2e/lighthouse.spec.ts --project=chromium --workers=1",
+    "bxs:verify": "node --test scripts/verify-bxs-six.node.mjs"
   },
   "dependencies": {
+    "@baobab-platform/experience-charts": "0.1.0",
+    "@baobab-platform/experience-geo-core": "0.3.1",
+    "@baobab-platform/experience-geo-deckgl": "0.1.0",
+    "@baobab-platform/experience-geo-maplibre": "0.2.0",
+    "@baobab-platform/experience-tokens": "0.3.1",
+    "@baobab-platform/experience-ui": "0.3.1",
+    "@base-ui/react": "1.9.0",
     "@medusajs/js-sdk": "2.19.0",
     "next": "16.4.1",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "server-only": "0.0.1",
-    "zod": "4.6.6",
-    "@base-ui/react": "1.9.0",
-    "@baobab-platform/experience-tokens": "0.3.1",
-    "@baobab-platform/experience-ui": "0.3.1",
-    "@baobab-platform/experience-geo-core": "0.3.1"
+    "zod": "4.6.6"
   },
   "devDependencies": {
     "@playwright/test": "1.62.1",

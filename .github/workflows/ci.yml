@@ -30,6 +30,7 @@ jobs:
       - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm test
+      - run: pnpm bxs:verify
       - run: pnpm build
         env:
           MEDUSA_BACKEND_URL: http://localhost:9000
@@ -55,7 +56,7 @@ jobs:
   logistics-browser:
     name: Logistics browser keyboard and accessibility
     runs-on: ubuntu-26.04
-    timeout-minutes: 20
+    timeout-minutes: 35
     container:
       {
         image: "ghcr.io/baobab-platform/baobab-dev:1.4.4-frontend-e2e@sha256:eb9c401cea16c4f333c28b250dd455e505752dfc6d11e9779a182a02bc207213",
@@ -73,6 +74,16 @@ jobs:
         run: bash scripts/configure-private-npm.sh
       - run: pnpm install --frozen-lockfile
       - run: pnpm test:logistics:browser
+      - name: Build production estate for independent quality gates
+        env:
+          MEDUSA_BACKEND_URL: http://localhost:9000
+          NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY: pk_ci_build_only
+          NEXT_PUBLIC_SITE_URL: http://127.0.0.1:3000
+          NEXT_PUBLIC_MARKET: za
+          NEXT_PUBLIC_DEFAULT_REGION_ID: reg_ci_build_only
+        run: pnpm build
+      - name: Enforce emitted-asset performance budget
+        run: pnpm perf:budget
       - name: Verify landing and Next.js logistics routes
         run: pnpm test:e2e
         env:
@@ -81,6 +92,18 @@ jobs:
           NEXT_PUBLIC_SITE_URL: http://localhost:3000
           NEXT_PUBLIC_MARKET: za
           NEXT_PUBLIC_DEFAULT_REGION_ID: reg_ci_build_only
+      - name: Independent homepage visual layout and screenshot evidence
+        run: pnpm test:e2e:visual
+        env:
+          CI: "true"
+      - name: WCAG landing-page and logistics-route accessibility
+        run: pnpm test:e2e:a11y
+        env:
+          CI: "true"
+      - name: Isolated Lighthouse production-build lab
+        run: pnpm test:e2e:lighthouse
+        env:
+          CI: "true"
       - name: Preserve browser evidence
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v4.7.5
@@ -91,3 +114,4 @@ jobs:
             playwright-report/
             test-results/
             tests/browser/logistics.spec.ts-snapshots/
+            !test-results/**/*.tmp
