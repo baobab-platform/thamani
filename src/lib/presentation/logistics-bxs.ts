@@ -3,10 +3,7 @@ import {
   type ChartSeriesProjection,
 } from "@baobab-platform/experience-charts"
 import { locationLabel, validateLocationObservation } from "@baobab-platform/experience-geo-core"
-import {
-  validatePoints,
-  type MapProjection,
-} from "@baobab-platform/experience-geo-maplibre/model"
+import { validatePoints, type MapProjection } from "@baobab-platform/experience-geo-maplibre/model"
 import {
   toEvidenceRows,
   validateEvidenceProjection,
@@ -22,16 +19,26 @@ import {
  * their activation needs a separate reviewed provider, CSP, consent and
  * performance grant. Only source-labelled textual alternatives are created.
  */
-export function logisticsEvidenceReadout(input: Readonly<{
-  chart: ChartSeriesProjection
-  map: MapProjection
-  overlay: EvidenceProjection
-  frameAt: string
-}>) {
+export function logisticsEvidenceReadout(
+  input: Readonly<{
+    chart: ChartSeriesProjection
+    map: MapProjection
+    overlay: EvidenceProjection
+    frameAt: string
+  }>,
+) {
   const chart = toAccessibleChartTable(input.chart)
-  let map: Readonly<{ restricted: boolean; explanation: string | null; rows: readonly Readonly<{
-    id: string; label: string; evidenceReference: string; freshness: string; location: string
-  }>[] }>
+  let map: Readonly<{
+    restricted: boolean
+    explanation: string | null
+    rows: readonly Readonly<{
+      id: string
+      label: string
+      evidenceReference: string
+      freshness: string
+      location: string
+    }>[]
+  }>
   if (input.map.visibility === "restricted") {
     // Do not accept hidden points on a restricted projection, even if a
     // downstream presenter would omit the canvas.
@@ -56,9 +63,10 @@ export function logisticsEvidenceReadout(input: Readonly<{
     throw new TypeError("Unknown map projection visibility")
   }
   const validatedOverlay = validateEvidenceProjection(input.overlay)
-  const overlay = validatedOverlay.visibility === "restricted"
-    ? []
-    : toEvidenceRows(validatedOverlay, input.frameAt)
+  const overlay =
+    validatedOverlay.visibility === "restricted"
+      ? []
+      : toEvidenceRows(validatedOverlay, input.frameAt)
   return Object.freeze({
     chart,
     map: Object.freeze({ ...map, rows: Object.freeze(map.rows) }),

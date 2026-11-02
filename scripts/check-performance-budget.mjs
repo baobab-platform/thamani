@@ -40,12 +40,7 @@ async function measure(paths) {
 
 function budget(label, actual, maximum) {
   const message =
-    label +
-    ": " +
-    (actual / 1024).toFixed(1) +
-    " KiB / " +
-    (maximum / 1024).toFixed(1) +
-    " KiB"
+    label + ": " + (actual / 1024).toFixed(1) + " KiB / " + (maximum / 1024).toFixed(1) + " KiB"
   console.log(message)
   if (actual > maximum) throw new Error("Frontend budget exceeded: " + message)
 }
@@ -63,10 +58,7 @@ const images = await measure(
   ),
 )
 const largest = (items) =>
-  items.reduce(
-    (best, item) => (item.bytes > best.bytes ? item : best),
-    { path: "none", bytes: 0 },
-  )
+  items.reduce((best, item) => (item.bytes > best.bytes ? item : best), { path: "none", bytes: 0 })
 
 budget(
   "All emitted client JavaScript",

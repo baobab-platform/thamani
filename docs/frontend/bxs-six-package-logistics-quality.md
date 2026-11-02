@@ -14,21 +14,21 @@ EA-DEV DEV-08/11/14. Brand colours/typography remain undecided.
   The six-package integration is proposed in ZuriBeans PR #147; do not claim
   its unmerged source is a current main-branch consumer.
 - Thamani baseline: published tokens/UI/geo-core v0.3.1, two distinct
-  Playwright harnesses, already approved *synthetic* workspace browser
+  Playwright harnesses, already approved _synthetic_ workspace browser
   snapshots, and functional quote -> booking -> tracking negatives.
   There was no public landing visual matrix, independent Lighthouse
   lab, or explicit emitted-asset size gate.
 
 ## Exactly six Shared distributable packages
 
-| Package | Release | Thamani use |
-| --- | --- | --- |
-| experience-tokens | 0.3.1 | Existing neutral namespaced stylesheet |
-| experience-ui | 0.3.1 | Existing Disclosure, FeedbackPanel, MilestoneTimeline, StatusLabel |
-| experience-geo-core | 0.3.1 | Existing source-labelled observations |
-| experience-charts | 0.1.0 | Null-preserving accessible shipment chart table adapter |
-| experience-geo-maplibre | 0.2.0 | Server-safe validated map data model only |
-| experience-geo-deckgl | 0.1.0 | Exact-frame, source-labelled textual overlay evidence only |
+| Package                 | Release | Thamani use                                                        |
+| ----------------------- | ------- | ------------------------------------------------------------------ |
+| experience-tokens       | 0.3.1   | Existing neutral namespaced stylesheet                             |
+| experience-ui           | 0.3.1   | Existing Disclosure, FeedbackPanel, MilestoneTimeline, StatusLabel |
+| experience-geo-core     | 0.3.1   | Existing source-labelled observations                              |
+| experience-charts       | 0.1.0   | Null-preserving accessible shipment chart table adapter            |
+| experience-geo-maplibre | 0.2.0   | Server-safe validated map data model only                          |
+| experience-geo-deckgl   | 0.1.0   | Exact-frame, source-labelled textual overlay evidence only         |
 
 All are exact published registry pins using Shared's publisher run 39073176845
 and independent SHA512/export verifier 39073362603. The maplibre runtime

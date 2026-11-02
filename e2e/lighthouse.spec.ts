@@ -82,9 +82,7 @@ test("public homepage and quote experience meet Lighthouse lab budgets", async (
     for (const category of ["accessibility", "best-practices", "seo"]) {
       expect(scores[category], route + " " + category).toBeGreaterThanOrEqual(95)
     }
-    expect(report.audits["cumulative-layout-shift"].numericValue).toBeLessThanOrEqual(
-      0.1,
-    )
+    expect(report.audits["cumulative-layout-shift"].numericValue).toBeLessThanOrEqual(0.1)
     // LCP is recorded, but one throttled load is NOT field p75 LCP/INP.
   }
 })

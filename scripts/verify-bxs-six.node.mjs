@@ -18,8 +18,19 @@ test("all six verified Shared releases remain exact direct dependencies", async 
   for (const [shortName, version] of Object.entries(versions)) {
     const name = "@baobab-platform/" + shortName
     assert.equal(pkg.dependencies[name], version)
-    assert.match(lock, new RegExp("['\\\"]?" + name.replace("/", "\\/") + "['\\\"]?:\\n\\s+specifier: " + version.replaceAll(".", "\\.")))
-    assert.ok(workspace.includes(name + "@" + version), name + " must retain its independently verified registry age exception")
+    assert.match(
+      lock,
+      new RegExp(
+        "['\\\"]?" +
+          name.replace("/", "\\/") +
+          "['\\\"]?:\\n\\s+specifier: " +
+          version.replaceAll(".", "\\."),
+      ),
+    )
+    assert.ok(
+      workspace.includes(name + "@" + version),
+      name + " must retain its independently verified registry age exception",
+    )
   }
   assert.equal(pkg.dependencies["@baobab-platform/experience-storybook"], undefined)
 })

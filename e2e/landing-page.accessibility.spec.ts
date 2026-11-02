@@ -36,9 +36,9 @@ test("desktop and mobile logistics landing are keyboard-accessible", async ({ pa
     await expect(page.getByRole("link", { name: "Skip to content" })).toBeFocused()
     await page.keyboard.press("Enter")
     await expect(page).toHaveURL(/#main$/)
-    expect(
-      await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
-    ).toBe(true)
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(
+      true,
+    )
   }
 })
 

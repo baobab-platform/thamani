@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest"
-import { approvedWorkerUrl, approvedResourceUrl, type MapProjection } from "@baobab-platform/experience-geo-maplibre/model"
+import {
+  approvedWorkerUrl,
+  approvedResourceUrl,
+  type MapProjection,
+} from "@baobab-platform/experience-geo-maplibre/model"
 import type { EvidenceProjection } from "@baobab-platform/experience-geo-deckgl"
 import type { ChartSeriesProjection } from "@baobab-platform/experience-charts"
 import { logisticsEvidenceReadout } from "./logistics-bxs"
@@ -18,24 +22,42 @@ const chart: ChartSeriesProjection = {
   availability: "available",
   sourceReference: "synthetic-test-only",
   asOf: time,
-  points: [{ id: "reported", label: "Reported", value: 0 }, { id: "unknown", label: "Not reported", value: null }],
+  points: [
+    { id: "reported", label: "Reported", value: 0 },
+    { id: "unknown", label: "Not reported", value: null },
+  ],
 }
 const map: MapProjection = {
   visibility: "authorised",
   projectionReference: "synthetic-projection",
-  points: [{
-    id: "one",
-    label: "Reported sample milestone",
-    evidenceReference: "synthetic-evidence",
-    freshness: "unknown",
-    observation,
-  }],
+  points: [
+    {
+      id: "one",
+      label: "Reported sample milestone",
+      evidenceReference: "synthetic-evidence",
+      freshness: "unknown",
+      observation,
+    },
+  ],
 }
 const overlay: EvidenceProjection = {
   visibility: "authorised",
   projectionReference: "synthetic-projection",
   sourceReference: "synthetic-test-only",
-  frames: [{ at: time, points: [{ id: "one", label: "Sample point", evidenceReference: "synthetic-evidence", freshness: "unknown", observation }] }],
+  frames: [
+    {
+      at: time,
+      points: [
+        {
+          id: "one",
+          label: "Sample point",
+          evidenceReference: "synthetic-evidence",
+          freshness: "unknown",
+          observation,
+        },
+      ],
+    },
+  ],
 }
 describe("Thamani six-package BXS presentation (not native authority)", () => {
   it("preserves zero versus missing chart values and source time", () => {
@@ -49,7 +71,13 @@ describe("Thamani six-package BXS presentation (not native authority)", () => {
   })
   it("denies independent restricted chart, map and overlay with no leaked rows", () => {
     const result = logisticsEvidenceReadout({
-      chart: { ...chart, availability: "restricted", points: [], sourceReference: null, asOf: null },
+      chart: {
+        ...chart,
+        availability: "restricted",
+        points: [],
+        sourceReference: null,
+        asOf: null,
+      },
       map: { visibility: "restricted", explanation: "No current CP grant" },
       overlay: { visibility: "restricted", explanation: "No shipment capability" },
       frameAt: time,
@@ -59,25 +87,61 @@ describe("Thamani six-package BXS presentation (not native authority)", () => {
     expect(result.overlay).toEqual([])
   })
   it("rejects restricted projection carrying hidden evidence", () => {
-    expect(() => logisticsEvidenceReadout({
-      chart,
-      map: { visibility: "restricted", explanation: "Denied", points: [{ secret: "tenant-b" }] } as unknown as MapProjection,
-      overlay,
-      frameAt: time,
-    })).toThrow("must not contain any evidence")
+    expect(() =>
+      logisticsEvidenceReadout({
+        chart,
+        map: {
+          visibility: "restricted",
+          explanation: "Denied",
+          points: [{ secret: "tenant-b" }],
+        } as unknown as MapProjection,
+        overlay,
+        frameAt: time,
+      }),
+    ).toThrow("must not contain any evidence")
   })
   it("rejects missing chart provenance and invalid/estimated GPS positions", () => {
-    expect(() => logisticsEvidenceReadout({ chart: { ...chart, sourceReference: null }, map, overlay, frameAt: time })).toThrow()
-    const badMap = { ...map, points: [{ ...("points" in map ? map.points[0] : {}), observation: { ...observation, position: [999, 0] } }] } as unknown as MapProjection
+    expect(() =>
+      logisticsEvidenceReadout({
+        chart: { ...chart, sourceReference: null },
+        map,
+        overlay,
+        frameAt: time,
+      }),
+    ).toThrow()
+    const badMap = {
+      ...map,
+      points: [
+        {
+          ...("points" in map ? map.points[0] : {}),
+          observation: { ...observation, position: [999, 0] },
+        },
+      ],
+    } as unknown as MapProjection
     expect(() => logisticsEvidenceReadout({ chart, map: badMap, overlay, frameAt: time })).toThrow()
   })
   it("does not interpolate overlay frames or invent a tracking position", () => {
-    const result = logisticsEvidenceReadout({ chart, map, overlay, frameAt: "2026-10-21T12:30:01Z" })
+    const result = logisticsEvidenceReadout({
+      chart,
+      map,
+      overlay,
+      frameAt: "2026-10-21T12:30:01Z",
+    })
     expect(result.overlay).toEqual([])
   })
   it("refuses third-party tile resources and non-application-owned workers", () => {
-    const policy = { allowedOrigins: ["https://approved.example"], attribution: "Licensed source", licenceReference: "approved-owner-record" }
+    const policy = {
+      allowedOrigins: ["https://approved.example"],
+      attribution: "Licensed source",
+      licenceReference: "approved-owner-record",
+    }
     expect(() => approvedResourceUrl("https://tile.openstreetmap.org/1/2/3.png", policy)).toThrow()
-    expect(() => approvedWorkerUrl({ url: "https://outside.example/maplibre-gl-worker.mjs", version: "6.16.0" }, "https://thamani.example", "6.16.0")).toThrow()
+    expect(() =>
+      approvedWorkerUrl(
+        { url: "https://outside.example/maplibre-gl-worker.mjs", version: "6.16.0" },
+        "https://thamani.example",
+        "6.16.0",
+      ),
+    ).toThrow()
   })
 })
