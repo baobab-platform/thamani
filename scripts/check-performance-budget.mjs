@@ -60,29 +60,23 @@ const images = await measure(
 const largest = (items) =>
   items.reduce((best, item) => (item.bytes > best.bytes ? item : best), { path: "none", bytes: 0 })
 
-budget(
-  "All emitted client JavaScript",
-  js.reduce((sum, item) => sum + item.bytes, 0),
-  limits.allClientJavaScript,
-)
-budget(
-  "Largest client chunk (" + largest(js).path + ")",
-  largest(js).bytes,
-  limits.largestClientChunk,
-)
-budget(
-  "All emitted CSS",
-  css.reduce((sum, item) => sum + item.bytes, 0),
-  limits.allCss,
-)
-budget(
-  "Largest public image (" + largest(images).path + ")",
-  largest(images).bytes,
-  limits.largestPublicImage,
-)
+const measured = {
+  allClientJavaScript: js.reduce((sum, item) => sum + item.bytes, 0),
+  largestClientChunk: largest(js).bytes,
+  allCss: css.reduce((sum, item) => sum + item.bytes, 0),
+  largestPublicImage: largest(images).bytes,
+}
+const oversized = Object.entries(limits)
+  .filter(([metric, maximum]) => measured[metric] > maximum)
+  .map(([metric, maximum]) => ({
+    metric,
+    actualBytes: measured[metric],
+    limitBytes: maximum,
+  }))
 
-// Independent DEV-11 custody uses actual production-build byte counts.
-// The four existing budget(...) calls above still reject every regression.
+// Preserve the original measurements even when a gate fails. Otherwise the
+// independent DEV-11 verifier receives no evidence precisely when diagnosis
+// matters most. Capturing failure does not relax or bypass any hard limit.
 await mkdir(join(root, "reports"), { recursive: true })
 await writeFile(
   join(root, "reports", "static-budget.json"),
@@ -90,15 +84,23 @@ await writeFile(
     {
       profile: "CI_PRODUCTION_BUILD",
       limits,
-      measured: {
-        allClientJavaScript: js.reduce((sum, item) => sum + item.bytes, 0),
-        largestClientChunk: largest(js).bytes,
-        allCss: css.reduce((sum, item) => sum + item.bytes, 0),
-        largestPublicImage: largest(images).bytes,
-      },
-      oversized: [],
+      measured,
+      oversized,
     },
     null,
     2,
   ) + "\n",
+)
+
+budget("All emitted client JavaScript", measured.allClientJavaScript, limits.allClientJavaScript)
+budget(
+  "Largest client chunk (" + largest(js).path + ")",
+  measured.largestClientChunk,
+  limits.largestClientChunk,
+)
+budget("All emitted CSS", measured.allCss, limits.allCss)
+budget(
+  "Largest public image (" + largest(images).path + ")",
+  measured.largestPublicImage,
+  limits.largestPublicImage,
 )
