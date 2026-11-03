@@ -5,7 +5,14 @@ export default defineConfig({
   testMatch: "*.spec.ts",
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 1 : 0,
-  reporter: [["list"], ["html", { open: "never" }]],
+  reporter: process.env.CI
+    ? [
+        ["list"],
+        ["html", { open: "never", outputFolder: "playwright-report/dev11-logistics" }],
+        ["json", { outputFile: "reports/dev11-logistics-playwright.json" }],
+      ]
+    : [["list"], ["html", { open: "never" }]],
+  ...(process.env.CI ? { outputDir: "test-results/dev11-logistics" } : {}),
   use: { baseURL: "http://127.0.0.1:4173", trace: "retain-on-failure" },
   projects: [
     { name: "desktop", use: { browserName: "chromium", viewport: { width: 1440, height: 900 } } },
