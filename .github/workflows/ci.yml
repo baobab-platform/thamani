@@ -87,6 +87,8 @@ jobs:
         run: pnpm build
       - name: Enforce emitted-asset performance budget
         run: pnpm perf:budget
+      - name: Regression-test DEV-11 budget failure evidence and strict thresholds
+        run: node --test scripts/check-performance-budget.node.mjs
       - name: Verify landing and Next.js logistics routes
         run: pnpm test:e2e
         env:
