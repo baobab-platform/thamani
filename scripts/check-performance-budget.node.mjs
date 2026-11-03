@@ -22,7 +22,9 @@ test("DEV-11 preserves actual measurements and refuses over-budget CSS", async (
     const run = () => spawnSync(process.execPath, [script], { cwd: root, encoding: "utf8" })
     const passing = run()
     assert.equal(passing.status, 0, passing.stderr)
-    const passEvidence = JSON.parse(await readFile(join(root, "reports", "static-budget.json"), "utf8"))
+    const passEvidence = JSON.parse(
+      await readFile(join(root, "reports", "static-budget.json"), "utf8"),
+    )
     assert.equal(passEvidence.profile, "CI_PRODUCTION_BUILD")
     assert.equal(passEvidence.measured.allCss, 1024)
     assert.deepEqual(passEvidence.oversized, [])
@@ -31,7 +33,9 @@ test("DEV-11 preserves actual measurements and refuses over-budget CSS", async (
     const failing = run()
     assert.notEqual(failing.status, 0)
     assert.match(failing.stderr, /Frontend budget exceeded: All emitted CSS/)
-    const failureEvidence = JSON.parse(await readFile(join(root, "reports", "static-budget.json"), "utf8"))
+    const failureEvidence = JSON.parse(
+      await readFile(join(root, "reports", "static-budget.json"), "utf8"),
+    )
     assert.equal(failureEvidence.measured.allCss, 64 * 1024 + 1)
     assert.deepEqual(failureEvidence.oversized, [
       { metric: "allCss", actualBytes: 64 * 1024 + 1, limitBytes: 64 * 1024 },
