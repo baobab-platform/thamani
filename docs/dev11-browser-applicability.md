@@ -23,3 +23,9 @@ https://playwright.dev/docs/api/class-testproject#test-project-test-ignore.
 This separate correction starts at accepted main because #50 has merged and
 the older unmerged IAM-N07 #44 has not adopted that quality implementation.
 No PR merge or provider promotion is authorised.
+
+The quality job now explicitly checks out the current PR head or main/event
+SHA, requires a matching `git rev-parse HEAD` and retains that original in
+`reports/dev11-source-sha.txt`. The independent observer requires the named
+source guard to pass and the readback to equal its run pin; GitHub's default
+temporary PR merge tree and API head metadata cannot substitute for this.
