@@ -72,7 +72,8 @@ export function ConfidentialAuthPanel() {
   if (view.kind === "unavailable") {
     return (
       <p role="alert">
-        The governed identity provider or session custody is unavailable. No access has been granted.
+        The governed identity provider or session custody is unavailable. No access has been
+        granted.
       </p>
     )
   }

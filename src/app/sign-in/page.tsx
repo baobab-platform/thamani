@@ -17,9 +17,7 @@ export default function SignInPage() {
   // Medusa customer cookie or first-party session impersonation fallback.
   if (
     process.env.THAMANI_OIDC_ENABLED !== "true" ||
-    !["development", "integration", "staging"].includes(
-      process.env.THAMANI_OIDC_ENVIRONMENT ?? "",
-    )
+    !["development", "integration", "staging"].includes(process.env.THAMANI_OIDC_ENVIRONMENT ?? "")
   ) {
     notFound()
   }
@@ -29,15 +27,17 @@ export default function SignInPage() {
       <SiteHeader />
       <main id="main" className="container" style={{ paddingBlock: "4rem", maxWidth: "55rem" }}>
         <p className="eyebrow">THAMANI GLOBAL · GOVERNED IDENTITY</p>
-        <h1 style={{ fontSize: "clamp(2rem, 6vw, 4rem)", lineHeight: 1.1 }}>
-          Business sign-in
-        </h1>
+        <h1 style={{ fontSize: "clamp(2rem, 6vw, 4rem)", lineHeight: 1.1 }}>Business sign-in</h1>
         <p style={{ maxWidth: "65ch", color: "var(--color-muted)" }}>
           Authenticate through the Baobab identity provider. Access to a customer organisation,
-          market, logistics quote or shipment remains subject to the current Control Plane
-          and native service permissions. Signing in does not grant permission to book.
+          market, logistics quote or shipment remains subject to the current Control Plane and
+          native service permissions. Signing in does not grant permission to book.
         </p>
-        <section aria-label="Private business sign-in" className="stack" style={{ marginTop: "2rem" }}>
+        <section
+          aria-label="Private business sign-in"
+          className="stack"
+          style={{ marginTop: "2rem" }}
+        >
           <ConfidentialAuthPanel />
         </section>
         <p style={{ marginTop: "1.5rem" }}>

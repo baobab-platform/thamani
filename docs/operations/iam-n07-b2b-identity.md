@@ -64,7 +64,7 @@ All `THAMANI_OIDC_*`, `THAMANI_BFF_*` and
 They must be supplied only by Infrastructure's private
 development lease, not a GitHub PR or browser form.
 
-This BFF's exact *human* token audience is
+This BFF's exact _human_ token audience is
 `baobab-control-plane`, with OIDC `openid` and CP
 `authority:self` as required by the existing Nabhold
 integration pattern. A separate **workload** client and
@@ -92,7 +92,7 @@ organisation, stale current state, cross-replica logout
 custody and no-approval claims. They are not a live connected
 Hydra/Kratos/CP/TMS runtime.
 
-Owner-supervised *development* acceptance, with source-pinned
+Owner-supervised _development_ acceptance, with source-pinned
 synthetic principals and **real** disposable services, requires:
 
 1. Existing IAM-N02 real browser 7 cases and Infrastructure
@@ -121,3 +121,10 @@ or production activation is authorized by this source.
 **Do not merge until final-head CI, reviewer assessment and
 actual connected development evidence satisfy their
 respective acceptance gates.**
+
+## 4 November 2026 formatting correction
+
+The exact pinned Prettier 3.9.6 formatter corrected the 22 files reported by
+CI run 41227055195. No identity protocol, session test, negative or source
+contract is removed. A full formatting check passes locally; fresh current-head
+CI, real TLS Redis and the still-outstanding N07 owner readbacks remain required.
