@@ -73,6 +73,8 @@ jobs:
           PR_HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
         run: bash scripts/configure-private-npm.sh
       - run: pnpm install --frozen-lockfile
+      - name: Preserve original gate reports during later diagnostics
+        run: node scripts/dev11-report-custody.node.mjs
       - name: Logistics keyboard and browser journeys
         env:
           CI: "true"
