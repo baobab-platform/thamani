@@ -16,9 +16,9 @@ permissions:
 
 jobs:
   foundation:
-    uses: baobab-platform/shared/.github/workflows/foundation-repository-gates.yml@756892fbdbcf0eb89bf62f720c372bad53748dea # BXS-05 trusted registry Foundation
+    uses: baobab-platform/shared/.github/workflows/foundation-repository-gates.yml@1401fe849b47268bc5a5ee113e74fa9dc451c717 # BXS-05 trusted registry Foundation
     with:
-      foundation_ref: "756892fbdbcf0eb89bf62f720c372bad53748dea"
+      foundation_ref: "1401fe849b47268bc5a5ee113e74fa9dc451c717"
       profile: full
       dockerfile: "Dockerfile"
       build_context: "."
