@@ -18,9 +18,10 @@ overrides:
 # patterns from this repository's own lint configuration, and is absent from the production image
 # (the runtime stage copies only .next/standalone). Accepted narrowly by advisory id rather than by
 # waiving the whole audit gate. Re-check when fast-glob/micromatch publish a fixed braces.
-auditConfig:
-  ignoreGhsas:
-    - GHSA-vfj7-8cjw-p6xm
+# BA-SEC-DEP-001: no unbounded auditConfig.ignoreGhsas suppression.
+# Upstream advisories (including GHSA-vfj7-8cjw-p6xm) must be reported,
+# patched or handled via the existing independently approved, expiring
+# Foundation exception governance. Never silently call an ignored advisory clean.
 allowBuilds:
   esbuild: true
   unrs-resolver: true
