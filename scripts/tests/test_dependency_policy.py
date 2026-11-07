@@ -210,6 +210,14 @@ class EstateDependencyMaintenancePolicyTests(unittest.TestCase):
             self.assertNotIn("corepack@latest", docker)
             self.assertIn("corepack@0.36.0", docker)
 
+    def test_stale_alpine_trivy_waiver_cannot_return_for_thamani(self):
+        import json
+        package = json.loads(PACKAGE.read_text(encoding="utf-8"))
+        if "thamani" in package["name"]:
+            self.assertFalse((ROOT / ".trivyignore").exists(),
+                             "Reintroducing a broad scanner waiver requires independent Security approval")
+
+
 
 if __name__ == "__main__":
     unittest.main()
