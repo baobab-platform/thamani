@@ -12,7 +12,7 @@ jobs:
     with: { languages: '["javascript-typescript"]' }
   dependency-audit:
     runs-on: ubuntu-26.04
-    container: { image: "ghcr.io/baobab-platform/baobab-dev:1.4.4-frontend", options: "--user 0" }
+    container: { image: "ghcr.io/baobab-platform/baobab-dev:1.4.4-frontend@sha256:1b3165067912eacbca96b576efb67e0428850b1ff1a953aa9013127a01635371", options: "--user 0" }
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Configure trusted GitHub Packages credentials
