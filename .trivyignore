@@ -1,3 +1,0 @@
-# Alpine 3.23 has not yet published the fixed OpenSSL 3.5.8-r0 package.
-# Remove this exception as soon as the pinned Node 24 image includes it.
-CVE-2026-14456
