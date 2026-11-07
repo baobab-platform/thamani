@@ -1,22 +1,36 @@
+# BA-SEC-DEP-001 — Approved Baobab Dependency & Security Maintenance Policy v1.0.
+# Advisory-driven security updates are not constrained by the weekly version schedule.
+# Keep the default branch implicit (target-branch disables security-update routing).
+# Routine grouping excludes majors and does not coalesce security updates.
+# Review pinned Actions, npm/pnpm, private Baobab Experience packages and
+# image digests independently before qualifying any protected deployment.
 version: 2
 updates:
   - package-ecosystem: npm
     directory: /
-    schedule: { interval: weekly }
-    groups: { frontend: { patterns: ["*"] } }
-    open-pull-requests-limit: 10
+    schedule: { interval: weekly, day: monday, time: "06:20", timezone: "Africa/Johannesburg" }
+    groups:
+      frontend-routine:
+        applies-to: "version-updates"
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+    open-pull-requests-limit: 5
     labels: ["dependencies", "frontend"]
-    commit-message: { prefix: "build(deps)" }
+    commit-message: { prefix: "build", include: "scope" }
   - package-ecosystem: github-actions
     directory: /
-    schedule: { interval: weekly }
-    groups: { actions: { patterns: ["*"] } }
-    open-pull-requests-limit: 10
+    schedule: { interval: weekly, day: monday, time: "06:00", timezone: "Africa/Johannesburg" }
+    groups:
+      actions-routine:
+        applies-to: "version-updates"
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+    open-pull-requests-limit: 5
     labels: ["dependencies", "github-actions"]
-    commit-message: { prefix: "build(deps)" }
+    commit-message: { prefix: "build", include: "scope" }
   - package-ecosystem: docker
     directory: /
-    schedule: { interval: weekly }
-    open-pull-requests-limit: 10
+    schedule: { interval: weekly, day: monday, time: "06:40", timezone: "Africa/Johannesburg" }
+    open-pull-requests-limit: 5
     labels: ["dependencies", "docker"]
-    commit-message: { prefix: "build(deps)" }
+    commit-message: { prefix: "build", include: "scope" }
