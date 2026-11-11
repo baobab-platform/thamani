@@ -18,7 +18,7 @@ ARG NEXT_PUBLIC_MARKET=za
 ARG NEXT_PUBLIC_DEFAULT_REGION_ID=reg_build_only
 ENV MEDUSA_BACKEND_URL=$MEDUSA_BACKEND_URL NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=$NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL NEXT_PUBLIC_MARKET=$NEXT_PUBLIC_MARKET NEXT_PUBLIC_DEFAULT_REGION_ID=$NEXT_PUBLIC_DEFAULT_REGION_ID
 RUN pnpm build
-# Distroless Node 24 nonroot runtime, immutable OCI digest; verify current Debian security patch status in CI.
+# Distroless Node 24 nonroot immutable OCI digest; current Trivy HIGH CVEs must be eliminated, not ignored.
 FROM gcr.io/distroless/nodejs24-debian13:nonroot@sha256:59c479c9b8c123e66047315c968aa2d35e31ae5149c856e4110a79c8b3563f0b AS runtime
 ARG VERSION=0.0.0-dev
 ARG REVISION=unknown
