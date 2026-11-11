@@ -2,8 +2,9 @@ import Link from "next/link"
 export function SiteHeader() {
   return (
     <header className="site-header">
-      <Link className="brand" href="/" aria-label="Thamani Global home">
+      <Link className="brand" href="/">
         THAMANI<small>GLOBAL LOGISTICS</small>
+        <span className="sr-only"> home</span>
       </Link>
       <nav aria-label="Primary">
         <Link href="/#services">Services</Link>

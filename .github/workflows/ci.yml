@@ -93,6 +93,11 @@ jobs:
           PR_HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
         run: bash scripts/configure-private-npm.sh
       - run: pnpm install --frozen-lockfile
+      # The baobab-dev browser image predates the upgrade to Playwright 1.65;
+      # download the exact browser revisions required by this lockfile instead
+      # of weakening the browser/visual/accessibility checks or retrying old binaries.
+      - name: Install Playwright browsers matching the exact pnpm lock
+        run: pnpm exec playwright install --with-deps chromium firefox webkit
       - name: Preserve original gate reports during later diagnostics
         run: node scripts/dev11-report-custody.node.mjs
       - name: Logistics keyboard and browser journeys
