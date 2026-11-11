@@ -26,13 +26,6 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
         run: bash scripts/configure-private-npm.sh
-      - name: Generate exact offline-compatible lock candidate (diagnostic; source gate retained)
-        run: |
-          set -euo pipefail
-          pnpm install --lockfile-only --no-frozen-lockfile
-          base64 -w0 pnpm-lock.yaml | fold -w 4000 | sed 's/^/THAMANI_LOCK_B64 /'
-          echo "::error::Reconciled dependency lock must be committed to PR before source acceptance"
-          exit 1
       - run: pnpm install --frozen-lockfile
       - name: Verify Foundation v2 configuration coherence
         run: node --test scripts/verify-foundation-v2.node.mjs
