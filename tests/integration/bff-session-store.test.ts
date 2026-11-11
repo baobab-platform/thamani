@@ -62,6 +62,10 @@ beforeAll(async () => {
     { stdio: "ignore" },
   )
   const password = randomBytes(32).toString("hex")
+  // Redis ACL's "#<hex>" credential syntax requires SHA-256 of a random
+  // 256-bit machine-generated secret. This is a TEST-ONLY Redis ACL protocol
+  // verifier, not a human password hash or a replacement for an Argon2id KDF.
+  // See Redis ACL SETUSER and the independent CodeQL security-review thread.
   // Restrict the fixture exactly as the production runbook requires. The
   // server never receives a plaintext password in argv or its ACL file.
   await writeFile(
