@@ -1,6 +1,9 @@
 node_modules/
 .next/
 out/
+prototype-dist/
+prototype/.next/
+prototype/out/
 coverage/
 playwright-report/
 test-results/

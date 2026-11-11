@@ -1,3 +1,7 @@
 .next
 node_modules
 pnpm-lock.yaml
+prototype-dist
+prototype/.next
+prototype/out
+prototype/next-env.d.ts

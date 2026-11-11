@@ -1,12 +1,14 @@
-import { describe, expect, it } from "vitest"
+import { describe, expect, it, vi } from "vitest"
 import { admitShipmentEvidence, type BgX03Ports } from "./bgx03-admission"
+vi.mock("server-only", () => ({}))
 
 const now = Date.parse("2026-10-17T10:00:00Z")
 const input = {
   shipmentReference: "synthetic-shipment-1",
   capability: "synthetic.capability.not-canonical",
   expectedAudience: "thamani-synthetic-bff",
-  now,
+  mode: "TRACKING" as const,
+  maximumEvidenceAgeMs: 3_600_000,
 }
 const identity = {
   state: "authenticated" as const,
@@ -19,6 +21,10 @@ const cp = {
   principalId: identity.principalId,
   tenantId: "synthetic-tenant-a",
   organisationId: "synthetic-org-a",
+  legalEntityId: "synthetic-legal-entity",
+  marketId: "synthetic-market-ug",
+  transportLegalActorApproved: true as const,
+  authorityReference: "synthetic-transport-mandate",
   capability: input.capability,
   bindingReference: "synthetic-cp-binding",
   expiresAt: "2026-10-17T10:05:00Z",
@@ -28,6 +34,9 @@ const shipment = {
   principalId: identity.principalId,
   tenantId: cp.tenantId,
   organisationId: cp.organisationId,
+  legalEntityId: cp.legalEntityId,
+  marketId: cp.marketId,
+  bindingReference: cp.bindingReference,
   shipmentReference: input.shipmentReference,
   sourceReference: "synthetic-native-evidence",
   asOf: "2026-10-17T09:30:00Z",
@@ -35,8 +44,16 @@ const shipment = {
 }
 function ports(): BgX03Ports {
   return {
+    clock: () => now,
     identity: async () => ({ ...identity }),
     cp: async () => ({ ...cp }),
+    access: async () => ({
+      ...cp,
+      shipmentReference: input.shipmentReference,
+      basis: "owner",
+      permissions: ["TRACKING"],
+      sourceReference: "synthetic-object-policy",
+    }),
     shipment: async () => ({ ...shipment }),
   }
 }
@@ -139,7 +156,7 @@ describe("BGX-03 preflight (synthetic receipts, NOT real service certification)"
     }
   })
   it("never grants permission when identity, CP or TMS is unavailable", async () => {
-    for (const failure of ["identity", "cp", "shipment"] as const) {
+    for (const failure of ["identity", "cp", "access", "shipment"] as const) {
       const fixture = ports()
       const unavailable = {
         ...fixture,
@@ -152,7 +169,7 @@ describe("BGX-03 preflight (synthetic receipts, NOT real service certification)"
   })
   it("never converts invalid input, missing native evidence or invalid timestamps into permission", async () => {
     await denied(await admitShipmentEvidence(ports(), { ...input, capability: "" }))
-    await denied(await admitShipmentEvidence(ports(), { ...input, now: Number.NaN }))
+    await denied(await admitShipmentEvidence({ ...ports(), clock: () => Number.NaN }, input))
     await denied(
       await admitShipmentEvidence(
         {
